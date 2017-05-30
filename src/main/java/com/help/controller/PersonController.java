@@ -21,5 +21,9 @@ public class PersonController {
     public List<Person> findPersonByName(Person person){
         return  ps.findPersonByName(person);
     }
-
+    @RequestMapping("findPerson.do")
+    @ResponseBody
+    public List<Person> findPerson(Person person){
+        return  ps.findPerson(person);
+    }
 }

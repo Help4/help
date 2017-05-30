@@ -17,4 +17,7 @@ public class PersonService {
     public List<Person> findPersonByName(Person person){
         return  ped.findPersonByName(person);
     }
+    public List<Person> findPerson(Person person){
+        return  ped.findPerson(person);
+    }
 }

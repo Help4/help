@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface PersonDao {
     public List<Person> findPersonByName(Person person);
+    public List<Person> findPerson(Person person);
 }
