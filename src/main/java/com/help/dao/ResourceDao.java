@@ -8,17 +8,8 @@ import com.help.entity.Resource2;
 
 import javax.annotation.Resource;
 
-@Repository("resourcedao")
+@Repository
 public interface ResourceDao {
-//
-//    public List<Resource2> findAllResource();
-//    public List<Resource2> findChild(int pid);
-//    public List<Resource2> findRs();
-//    public void saveRes(Resource2 resource2);
-//    public void removeRes(int id);
-//
-//    public int fenpei(ArrayList<Map> data);
-//    public List<Resource2> findResByUser(int userid);
-//    public void removeOldRes(int userid);
+    public List<Resource2> findAllResource();
 
 }

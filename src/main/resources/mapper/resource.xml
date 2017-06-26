@@ -3,77 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.help.dao.ResourceDao">
-    <!-- 读取所有资源节点 -->
+    <!-- 所有节点 -->
+    <select id="findRs" resultType="com.help.entity.Resource2">
+        select * from resources
+    </select>
+    <!--获取所有节点及其父节点-->
     <resultMap type="com.help.entity.Resource2" id="map_resource">
-        <result property="id" column="id" />
+        <result property="re_id" column="re_id" />
         <result property="text" column="text" />
         <result property="url" column="url" />
+        <result property="ptext" column="ptext"/>
         <collection property="children" ofType="com.help.entity.Resource2">
-            <result property="id" column="b_id" />
+            <result property="re_id" column="b_id" />
             <result property="text" column="b_name" />
             <result property="url" column="b_url2" />
+            <result property="ptext" column="text"/>
         </collection>
     </resultMap>
 
     <select id="findAllResource" resultMap="map_resource">
-        select a.id,a.text,a.url,b.id as b_id,b.text as b_name,b.url as b_url2
+        select a.re_id,a.text,a.url,a.ptext,b.re_id as b_id,b.text as b_name,b.url as b_url2
         from resources a left join resources b on b.re_pid=a.re_id where a.re_pid=0
     </select>
-    <!-- 查找子节点 -->
-    <select id="findChild" resultType="com.help.entity.Resource2">
-        select * from resources where re_pid=#{pid}
-    </select>
-    <!-- 所有节点 -->
-    <select id="findRs" resultType="com.help.entity.Resource2">
-        select * from resources
-
-    </select>
-    <!-- 通过用户角色的id找到所有节点 -->
-    <select id="findResByRole" resultType="com.help.entity.Resource2">
-        select * from resources r left join role_resources rr on r.re_id=rr.re_id left join role ro on rr.r_id=ro.rid where ro.rid=#{rid}
-
-    </select>
-
-
-
-
-
-    <!-- 增加节点 -->
-    <select id="saveRes" parameterType="com.help.entity.Resource2">
-        insert into resources(text,url,pid) values(#{text},#{url},#{pid})
-    </select>
-
-    <!-- 删除节点 -->
-    <select id="removeRes" >
-        delete from resources where id=#{id}
-    </select>
-
-
-    <!-- 分配权限 -->
-    <insert id="fenpei" >
-        insert into user_resource values
-        <foreach collection="list" item="m" separator=",">
-            (#{m.userid},#{m.resourceid})
-        </foreach>
-
-    </insert>
-
-
-    <!-- 删除老的权限-->
-    <delete id="removeOldRes" >
-        delete from user_resource where uid=#{userid}
-
-    </delete>
-
-
-
 </mapper>
-
-
-
-
-
-
-
-
-

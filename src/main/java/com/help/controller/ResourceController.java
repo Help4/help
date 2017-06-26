@@ -16,6 +16,16 @@ import java.util.List;
 @Controller
 public class ResourceController {
 
+    @Resource
+    private  ResourceService rService;
+    //所有节点
+    @RequestMapping("findAllResource.do")
+    @ResponseBody
+    public List<Resource2> findAllResource(){
+       System.out.println("1111");
+        return rService.findAllResource();
+    }
+
 //    @Resource
 //    private ResourceService rService;
 //    //所有节点
