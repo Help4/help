@@ -43,7 +43,7 @@
         </div>
         <div class="input-group">
             <span class="input-group-addon">部门</span>
-            <select name="org_name" id="user_rid" class="form-control"><lect>
+            <select name="org_name" id="user_rid" class="form-control"/>
         </div>
         <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
     </form>
