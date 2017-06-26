@@ -4,8 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.help.dao.RoleDao">
 
-    <select id="find"  resultType="com.help.entity.Role">
-        select * from role where rid=1;
+    <!-- 根据role account查找持有的资源模块 -->
+    <select id="findRole" resultType="com.help.entity.Role">
+        select * from role where account=#{account};
+        <!--  select * from resources where id in (select resourceid from user_resource where uid=#{uid}) -->
     </select>
+    <!-- 根据userid查找持有的资源模块 -->
+    <select id="findReByRole" resultType="com.help.entity.Resource2">
+
+        select * from resources re where re.re_pid=0 and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.r_id=ro.rid where ro.rid=#{rid})
+
+    </select>
+
+    <!-- 根据uid,pid 查找持有的资源模块 -->
+    <select id="findSubByPid" resultType="com.help.entity.Resource2" parameterType="map">
+    select * from resources re where re.re_pid=#{pid} and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.r_id=ro.rid where ro.rid=#{rid})
+  </select>
+
 
 </mapper>

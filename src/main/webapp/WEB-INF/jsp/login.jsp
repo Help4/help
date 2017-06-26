@@ -2,6 +2,15 @@
 <html>
 <head>
     <title>登录</title>
+    <script type="text/javascript">
+        function init() {
+    var msg=$.{msg};
+    alert(msg);
+
+
+        }
+        $(init);
+    </script>
 </head>
 <body>
 <div style="display: flex;justify-content: center">
@@ -14,7 +23,10 @@
         <br/>
         <input type="submit" value="登录"/>
     </form>
-
 </div>
+
+
+
+
 </body>
 </html>

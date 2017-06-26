@@ -36,6 +36,7 @@
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.6" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-cas:1.3.2" />
           <element id="library" level="project" name="Maven: org.jasig.cas.client:cas-client-core:3.2.2" />
+          <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">
