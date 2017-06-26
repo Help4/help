@@ -15,4 +15,5 @@ public interface UserDao {
  public List<User> findAllUser();
  //删除用户
  public int removeUserById(List<Integer> data);
+ public void addUser(User user);
 }

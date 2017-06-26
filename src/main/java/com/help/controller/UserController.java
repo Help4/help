@@ -29,4 +29,10 @@ public class UserController {
     public int removeUserById(@RequestBody ArrayList<Integer> data){
         return us.removeUserById(data);
     }
+    @RequestMapping("addUser.do")
+    @ResponseBody
+    public int addUser(User user){
+         us.addUser(user);
+         return 1;
+    }
 }

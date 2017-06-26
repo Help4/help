@@ -21,7 +21,7 @@
 <div id="user_grid"></div>
 <div id="user_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:300px">
     <form id="user_form" class="form-group" style="margin: 10px">
-        <input id="user_id" type="hidden" name="id" value="0"/>
+        <input id="user_id" type="hidden" name="uid" value="0"/>
         <div class="input-group">
             <span class="input-group-addon">姓名</span>
             <input id="user_name" type="text" name="name" class="form-control"/>
@@ -43,8 +43,12 @@
             <input id="user_phone" type="text" name="phone" class="form-control"/>
         </div>
         <div class="input-group">
+            <span class="input-group-addon">权限</span>
+            <input id="user_des" type="text" name="responsidle" class="form-control"/>
+        </div>
+        <div class="input-group">
             <span class="input-group-addon">部门</span>
-            <select id="user_org" class="form-control" name="org">
+            <select id="user_org" class="form-control" name="org_name">
             </select>
         </div>
         <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
@@ -116,6 +120,7 @@
         var x = $("#user_form").serialize();
         //  alert(x);
         $.get("addUser.do", x, function (d) {
+            alert(d);
             $("#user_alert").window("close");
             //重新加载数据
             $("#user_grid").datagrid("reload");
