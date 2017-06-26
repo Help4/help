@@ -16,5 +16,7 @@ public class UserService {
    public List<User> findAllUser(){
        return  ud.findAllUser();
    }
-
+   public int removeUserById(List<Integer> data){
+        return  ud.removeUserById(data);
+    }
 }
