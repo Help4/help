@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<div id="user_grid"></div>
+<div id="org_grid"></div>
 <div id="qx_window" class="easyui-window" data-options="closed:true,modal:true" style="width:300px;height:400px">
     <div style="width:100%;height:90%;padding:30px 30px">
         <ul id="qx_tree" class="easyui-tree" data-options="url:'findRs.do?userid=32',checkbox:true,cascadeCheck:false"></ul>
@@ -12,7 +12,7 @@
 <script>
     var userid=0;
     function init(){
-        $("#user_grid").datagrid({
+        $("#org_grid").datagrid({
 
             columns:[[
 
@@ -35,13 +35,13 @@
         $.getJSON("search.do",function(data){
             //给列表填充数据
 
-            $("#user_grid").datagrid("loadData",data);
+            $("#org_grid").datagrid("loadData",data);
         });
     }
     //删除
     function remove(){
         //获取选择的数据
-        var rows= $("#user_grid").datagrid("getSelections");
+        var rows= $("#org_grid").datagrid("getSelections");
         //创建一个数组
         var as=[];
         for(var i in rows){
@@ -63,7 +63,7 @@
     }
     //弹出窗口
     function qx_show(){
-        var rows=$("#user_grid").datagrid("getSelections");
+        var rows=$("#org_grid").datagrid("getSelections");
         if(rows.length==1){
             //显示window
             $("#qx_window").window("open");
@@ -74,7 +74,7 @@
     }
     //保存
     function qx_save(){
-        var user=$("#user_grid").datagrid("getSelected");
+        var user=$("#org_grid").datagrid("getSelected");
         //获取选择的节点
         var nodes= $("#qx_tree").tree("getChecked");
         var as=[];

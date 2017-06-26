@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="css/easyui.css" />
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/easyui.js"></script>
+    <style type="text/css">
+        html,body{
+            height: 100%;
+        }
+    </style>
     <script type="text/javascript">
 
         function init(){
@@ -55,7 +60,7 @@
     </script>
 </head>
 <body>
-<div class="easyui-layout" style="width:100%;height:600px;">
+<div class="easyui-layout" style="width:100%;height:1000px;">
     <div data-options="region:'north'"
          style="height:100px;background-color:blue;text-align: center" >
         <div style="margin-top: 20px"> <h3>xxx市的民政局OA救助系统</h3></div>
