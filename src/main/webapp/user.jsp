@@ -34,14 +34,6 @@
             <input id="user_age" type="number" name="age" class="form-control"/>
         </div>
         <div class="input-group">
-            <span class="input-group-addon">性别</span>
-            <input id="user_gender" type="text" name="gender" class="form-control"/>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">年龄</span>
-            <input id="user_age" type="number" name="age" class="form-control"/>
-        </div>
-        <div class="input-group">
             <span class="input-group-addon">邮箱</span>
             <input id="user_email" type="text" name="email" class="form-control"/>
         </div>
