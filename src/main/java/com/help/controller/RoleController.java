@@ -83,9 +83,9 @@ public class RoleController {
         map.put("rid",role.getRid());
         map.put("pid",pid);
 
-        System.out.println("rid:"+role.getRid()+".."+pid);
+
         List<Resource2> list = rs.findSubByPid(map);
-        System.out.println("+++"+list.size());
+
         return list;
 
     }

@@ -26,7 +26,7 @@ public class RoleService {
   }
 
   public List<Resource2>  findSubByPid( Map<String,Integer> map){
-      System.out.println("88");
+
        return rd.findSubByPid(map);
   }
 
