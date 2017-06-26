@@ -2,14 +2,11 @@ package com.help.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017/6/23 0023.
- */
 public class Organizations implements Serializable {
     private int orgid;
     private String org_name;
-    private String description;
-    private int parentid;
+    private String org_description;
+    private int org_parentId;
 
     public int getOrgid() {
         return orgid;
@@ -27,30 +24,29 @@ public class Organizations implements Serializable {
         this.org_name = org_name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOrg_description() {
+        return org_description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOrg_description(String org_description) {
+        this.org_description = org_description;
     }
 
-    public int getParentid() {
-        return parentid;
+    public int getOrg_parentId() {
+        return org_parentId;
     }
 
-    public void setParentid(int parentid) {
-        this.parentid = parentid;
+    public void setOrg_parentId(int org_parentId) {
+        this.org_parentId = org_parentId;
     }
 
     public Organizations() {
-        super();
     }
 
-    public Organizations(int orgid, String org_name, String description, int parentid) {
+    public Organizations(int orgid, String org_name, String org_description, int org_parentId) {
         this.orgid = orgid;
         this.org_name = org_name;
-        this.description = description;
-        this.parentid = parentid;
+        this.org_description = org_description;
+        this.org_parentId = org_parentId;
     }
 }
