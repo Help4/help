@@ -27,14 +27,21 @@ public class OrganizationController {
 
     @RequestMapping("findAll_Org.do")
     @ResponseBody
-    public List<Organizations> findAll_Org(HttpServletRequest request, HttpServletResponse response){
-        List<Organizations> list= os.search();
+    public List<Organizations> findAll_Org(HttpServletRequest request, HttpServletResponse response) {
+        List<Organizations> list = os.search();
 
-        HttpSession session= request.getSession();
-        session.setAttribute("list",list);
-        if(list!=null){
+        HttpSession session = request.getSession();
+        session.setAttribute("list", list);
+        if (list != null) {
             return list;
+
         }
-       return list;
+        return list;
+
     }
+
+    public List<Organizations> find(){
+           return os.find();
+    }
+
 }

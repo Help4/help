@@ -22,7 +22,7 @@ public class ResourceController {
     @RequestMapping("findAllResource.do")
     @ResponseBody
     public List<Resource2> findAllResource(){
-       System.out.println("1111");
+
         return rService.findAllResource();
     }
 

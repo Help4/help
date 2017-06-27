@@ -21,6 +21,7 @@ public class UserController {
     @RequestMapping("findAllUser.do")
     @ResponseBody
     public List<User> findAllUser() {
+        System.out.println(us.findAllUser().size());
         return  us.findAllUser();
     }
     //删除用户

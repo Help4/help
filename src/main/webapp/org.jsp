@@ -2,7 +2,7 @@
 <div id="org_grid"></div>
 <div id="qx_window" class="easyui-window" data-options="closed:true,modal:true" style="width:300px;height:400px">
     <div style="width:100%;height:90%;padding:30px 30px">
-        <ul id="qx_tree" class="easyui-tree" data-options="url:'findRs.do?userid=32',checkbox:true,cascadeCheck:false"></ul>
+        <ul id="qx_tree" class="easyui-tree" data-options="url:'fi.do?userid=32',checkbox:true,cascadeCheck:false"></ul>
     </div>
     <div style="display:flex;justify-content:center">
         <a class="easyui-linkbutton" onclick="qx_save()">保 &nbsp;&nbsp;&nbsp;存</a>
@@ -32,7 +32,7 @@
         load();
     }
     function load(){
-        $.getJSON("search.do",function(data){
+        $.getJSON("findAll_Org.do",function(data){
             //给列表填充数据
 
             $("#org_grid").datagrid("loadData",data);

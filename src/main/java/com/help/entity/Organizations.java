@@ -1,12 +1,24 @@
 package com.help.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Organizations implements Serializable {
     private int orgid;
     private String org_name;
     private String org_description;
     private int org_parentId;
+
+    private Set<Organizations> children=new HashSet<Organizations>();
+
+    public Set<Organizations> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Organizations> children) {
+        this.children = children;
+    }
 
     public int getOrgid() {
         return orgid;

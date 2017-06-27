@@ -8,4 +8,8 @@
         select * from organizations
     </select>
 
+    <select id="find"  resultType="com.help.entity.Organizations">
+        select * from organizations
+    </select>
+
 </mapper>

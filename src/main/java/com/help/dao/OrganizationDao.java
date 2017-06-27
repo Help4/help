@@ -9,5 +9,6 @@ import java.util.List;
 public interface OrganizationDao {
 
     public List<Organizations> search();
+    public List<Organizations> find();
 }
 

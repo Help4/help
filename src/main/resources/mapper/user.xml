@@ -3,19 +3,19 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.help.dao.UserDao">
-	<resultMap  type="com.help.entity.User" id="map_user">
-		<result property="uid" column="uid"/>
-		<result property="name" column="name" />
-		<result property="gender" column="gender"/>
-		<result property="age" column="age"/>
-		<result property="email" column="email"/>
-		<result property="phone" column="phone"/>
-		<result property="responsidle" column="responsidle"/>
-		<result property="org_name" column="org_name"/>
-	</resultMap>
-	<select id="findAllUser" resultMap="map_user">
+	<!--<resultMap  type="com.help.entity.User" id="map_user">-->
+		<!--<result property="uid" column="uid"/>-->
+		<!--<result property="name" column="name" />-->
+		<!--<result property="gender" column="gender"/>-->
+		<!--<result property="age" column="age"/>-->
+		<!--<result property="email" column="email"/>-->
+		<!--<result property="phone" column="phone"/>-->
+		<!--<result property="responsidle" column="responsidle"/>-->
+		<!--<result property="org_name2" column="org_name"/>-->
+	<!--</resultMap>-->
+	<select id="findAllUser" resultType="com.help.entity.User">
 		select u.uid,u.name,u.gender,u.age,u.email,u.phone,u.responsidle,org.org_name from user u
-		LEFT JOIN organizations org on uid=orgid
+		LEFT JOIN organizations org on u.org_name=org.orgid ;
 	</select>
 	<!-- 删除用户 -->
 	<delete id="removeUserById">
@@ -31,4 +31,5 @@
 		insert into user(uid,name,gender,age,email,phone,responsidle,org_name)
 		values(#{uid},#{name},#{gender},#{age},#{email},#{phone},#{responsidle},#{org_name})
 	</insert>
+
 </mapper>

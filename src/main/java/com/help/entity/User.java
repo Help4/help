@@ -5,65 +5,32 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int uid;
     private String name;
+    private String gender;
+    private int age;
     private String email;
     private int phone;
     private String responsidle;
-    private String gender;
-    private int age;
-    private String org_name;
 
-    public User(int uid, String name, String email, int phone, String responsidle, String gender, int age, String org_name) {
-        this.uid = uid;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.responsidle = responsidle;
-        this.gender = gender;
-        this.age = age;
-        this.org_name = org_name;
-    }
+    private String  org_name;
 
-    public User(String name, String email, int phone, String responsidle, String gender, int age, String org_name) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.responsidle = responsidle;
-        this.gender = gender;
-        this.age = age;
-        this.org_name = org_name;
-    }
 
-    public String getOrg_name() {
-        return org_name;
-    }
-
-    public void setOrg_name(String org_name) {
-        this.org_name = org_name;
-    }
-
-    public User(String name, String email, int phone, String responsidle, String gender, int age) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.responsidle = responsidle;
-        this.gender = gender;
-        this.age = age;
-    }
 
     public User() {
     }
 
-    public User(int uid, String name, String email, int phone, String responsidle, String gender, int age) {
+    public User(int uid, String name, String gender, int age, String email, int phone, String responsidle, String org_name) {
         this.uid = uid;
         this.name = name;
+        this.gender = gender;
+        this.age = age;
         this.email = email;
         this.phone = phone;
         this.responsidle = responsidle;
-        this.gender = gender;
-        this.age = age;
+        this.org_name = org_name;
     }
 
     public int getUid() {
+
         return uid;
     }
 
@@ -77,6 +44,22 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -103,19 +86,11 @@ public class User implements Serializable {
         this.responsidle = responsidle;
     }
 
-    public String getGender() {
-        return gender;
+    public String getOrg_name() {
+        return org_name;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setOrg_name(String org_name) {
+        this.org_name = org_name;
     }
 }

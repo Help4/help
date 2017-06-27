@@ -123,7 +123,7 @@
             alert(d);
             $("#user_alert").window("close");
             //重新加载数据
-            $("#user_grid").datagrid("reload");
+            load();
         });
 
     }
@@ -162,5 +162,39 @@
         }
     }
 
+    function edit() {
+        var x = $("#user_grid").datagrid("getSelected");
+        if(x.uid!=0){
+            $("#user_id").val(x.uid);
+            $("#user_name").val(x.name);
+            $("#user_age").val(x.age);
+            $("#user_email").val(x.email);
+
+            $("#user_gender").val(x.gender);
+            $("#user_phone").val(x.phone);
+
+            $.getJSON("findAll_Org.do", function (json) {
+
+
+                //把普通string解析为json对象
+
+
+                var op="";
+                for(var i in json){
+                    if(json[i].org_name==x.org_name){
+                        op+="<option selected = \"selected\" value="+json[i].orgid+">"+json[i].org_name+"</option>";
+                    }
+                    op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
+                }
+
+                $("#user_org").html(op);
+            })
+
+            //弹出窗口
+            $("#user_alert").window("open");
+        }
+
+
+    }
     init();
 </script>
