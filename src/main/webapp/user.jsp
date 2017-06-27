@@ -99,6 +99,8 @@
     }
 
     function addUser() {
+        var x = $("#user_grid").datagrid("getSelected");
+
         $.getJSON("findAll_Org.do", function (json) {
 
 
@@ -112,19 +114,55 @@
 
              $("#user_org").html(op);
         })
-        //弹出窗口
+
+        $("#user_id").val(0);
+        $("#user_name").val(x);
+        $("#user_age").val(x);
+        $("#user_email").val(x);
+        $("#user_des").val(x);
+        $("#user_gender").val(x);
+        $("#user_phone").val(x);
         $("#user_alert").window("open");
+
     }
 
     function save() {
+        var y = $("#user_grid").datagrid("getSelected");
+
         var x = $("#user_form").serialize();
-        //  alert(x);
-        $.get("addUser.do", x, function (d) {
-            alert(d);
-            $("#user_alert").window("close");
-            //重新加载数据
-            load();
-        });
+
+
+
+
+            if(y!=null) {
+
+                $.get("editUser.do", x, function (d) {
+
+                    $("#user_alert").window("close");
+                    //重新加载数据
+                    load();
+                });
+            }else {
+            $.post("au.do",x, function (d) {
+                $("#user_alert").window("close");
+                //重新加载数据
+                load();
+            });
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -164,12 +202,13 @@
 
     function edit() {
         var x = $("#user_grid").datagrid("getSelected");
+
         if(x.uid!=0){
             $("#user_id").val(x.uid);
             $("#user_name").val(x.name);
             $("#user_age").val(x.age);
             $("#user_email").val(x.email);
-
+            $("#user_des").val(x.responsidle);
             $("#user_gender").val(x.gender);
             $("#user_phone").val(x.phone);
 

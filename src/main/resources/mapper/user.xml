@@ -32,4 +32,9 @@
 		values(#{uid},#{name},#{gender},#{age},#{email},#{phone},#{responsidle},#{org_name})
 	</insert>
 
+	<update id="editUser" parameterType="com.help.entity.User">
+		update  user set name=#{name},gender=#{gender},age=#{age},email=#{email},phone=#{phone},responsidle=#{responsidle},org_name=#{org_name}
+	where uid = #{uid}
+	</update>
+
 </mapper>

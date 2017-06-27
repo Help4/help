@@ -18,6 +18,8 @@ public class User implements Serializable {
     public User() {
     }
 
+
+
     public User(int uid, String name, String gender, int age, String email, int phone, String responsidle, String org_name) {
         this.uid = uid;
         this.name = name;
