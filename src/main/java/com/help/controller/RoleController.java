@@ -32,13 +32,10 @@ public class RoleController {
 
     @Resource
    private RoleService rs;
-
     @RequestMapping("tologin.do")
     public String tologin() {
-
         return "login";
     }
-
     @RequestMapping("login.do")
     public String login(String account,String pwd,HttpServletRequest request, HttpServletResponse response){
         HttpSession session= request.getSession();
@@ -53,13 +50,9 @@ public class RoleController {
             return "login";
         }
        Role role=rs.findRole(account);
-
-
         session.setAttribute("role",role);
         return "main";
     }
-
-
 
     @RequestMapping(value="findReByRole.do",method= RequestMethod.GET)
     @ResponseBody
@@ -68,26 +61,22 @@ public class RoleController {
        List<Resource2> list= rs.findReByRole(rid);
 
         return list;
-
     }
-
     @RequestMapping("findSubByPid.do")
     @ResponseBody
     public List<Resource2> findSubByPid(int pid,HttpServletRequest request){
-
-
         HttpSession session = request.getSession();
        Role role = (Role) session.getAttribute("role");
 
         Map<String, Integer> map=new HashMap<String, Integer>();
         map.put("rid",role.getRid());
         map.put("pid",pid);
-
-
         List<Resource2> list = rs.findSubByPid(map);
-
         return list;
-
     }
-
+    @RequestMapping("findAllRole.do")
+    @ResponseBody
+    public List<Role> findAllRole(){
+        return rs.findAllRole();
+    };
 }

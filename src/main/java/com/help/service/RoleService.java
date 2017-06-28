@@ -13,13 +13,9 @@ import java.util.Map;
 public class RoleService {
     @Resource
     private RoleDao rd;
-
-
     public Role findRole(String account) {
         return rd.findRole(account);
     }
-
-
   public List<Resource2> findReByRole(int rid){
 
     return rd.findReByRole(rid);
@@ -29,6 +25,8 @@ public class RoleService {
 
        return rd.findSubByPid(map);
   }
-
+  public List<Role> findAllRole(){
+      return rd.findAllRole();
+  };
 
 }

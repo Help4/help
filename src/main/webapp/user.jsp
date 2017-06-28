@@ -18,7 +18,7 @@
         </div>
     </form>
 </div>
-<div id="user_grid"></div>
+<div id="user_grid" class="easyui-pagination"></div>
 <div id="user_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:300px">
     <form id="user_form" class="form-group" style="margin: 10px">
         <input id="user_id" type="hidden" name="uid" value="0"/>
@@ -56,9 +56,8 @@
 </div>
 </div>
 <script>
-    function init() {
+    function userinit() {
         $("#user_grid").datagrid({
-
             columns: [[
                 {field: "uid", width: 100, checkbox: true},
                 {field: "name", title: "姓名", width: 100},
@@ -85,33 +84,26 @@
                     remove();
                 }
                 }
-
             ]
         });
         load();
     }
-
     function load() {
         $.getJSON("findAllUser.do", function (data) {
             //给列表填充数据
             $("#user_grid").datagrid("loadData", data);
         });
     }
-
     function addUser() {
         var x = $("#user_grid").datagrid("getSelected");
 
         $.getJSON("findAll_Org.do", function (json) {
 
-
             //把普通string解析为json对象
-
-
              var op="";
              for(var i in json){
                  op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
              }
-
              $("#user_org").html(op);
         })
 
@@ -123,17 +115,10 @@
         $("#user_gender").val(x);
         $("#user_phone").val(x);
         $("#user_alert").window("open");
-
     }
-
     function save() {
         var y = $("#user_grid").datagrid("getSelected");
-
         var x = $("#user_form").serialize();
-
-
-
-
             if(y!=null) {
 
                 $.get("editUser.do", x, function (d) {
@@ -212,12 +197,8 @@
             $("#user_gender").val(x.gender);
             $("#user_phone").val(x.phone);
 
-            $.getJSON("findAll_Org.do", function (json) {
-
-
+            $.getJSON("", function (json) {
                 //把普通string解析为json对象
-
-
                 var op="";
                 for(var i in json){
                     if(json[i].org_name==x.org_name){
@@ -232,8 +213,6 @@
             //弹出窗口
             $("#user_alert").window("open");
         }
-
-
     }
-    init();
+    $(userinit);
 </script>

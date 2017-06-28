@@ -10,11 +10,7 @@ public class User implements Serializable {
     private String email;
     private int phone;
     private String responsidle;
-
     private String  org_name;
-
-
-
     public User() {
     }
 

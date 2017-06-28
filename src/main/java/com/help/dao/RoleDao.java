@@ -12,10 +12,8 @@ import java.util.Map;
  */
 @Repository
 public interface RoleDao {
-
-
+    public List<Role> findAllRole();
     public Role findRole(String account);
     public List<Resource2> findReByRole(int rid);
-
     public List<Resource2> findSubByPid(Map<String,Integer> map);
 }

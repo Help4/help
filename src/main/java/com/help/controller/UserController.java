@@ -20,7 +20,7 @@ public class UserController {
     @Resource
     private UserService us;
 
-    @RequestMapping("findAllUser.do")
+    @RequestMapping("/findAllUser.do")
     @ResponseBody
     public List<User> findAllUser() {
 
