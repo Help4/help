@@ -1,5 +1,7 @@
 package com.help.entity;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.io.Serializable;
 import java.util.Set;
 import java.util.HashSet;
@@ -13,6 +15,25 @@ public class Resource2 implements Serializable{
     private int re_pid;
     private String ptext;
     private Set<Resource2> children=new HashSet<Resource2>();
+
+    public Resource2() {
+    }
+
+    public Resource2(int re_id,String text, String url, int re_pid) {
+        this.re_id=re_id;
+        this.text = text;
+        this.url = url;
+        this.re_pid = re_pid;
+    }
+
+    public Resource2(int re_id, String text, String url, int re_pid, String ptext, Set<Resource2> children) {
+        this.re_id = re_id;
+        this.text = text;
+        this.url = url;
+        this.re_pid = re_pid;
+        this.ptext = ptext;
+        this.children = children;
+    }
 
     public String getPtext() {
         return ptext;

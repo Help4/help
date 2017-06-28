@@ -18,11 +18,29 @@
             <result property="text" column="b_name" />
             <result property="url" column="b_url2" />
             <result property="ptext" column="text"/>
+            <result property="re_pid" column="re_pid"/>
         </collection>
     </resultMap>
 
     <select id="findAllResource" resultMap="map_resource">
-        select a.re_id,a.text,a.url,a.ptext,b.re_id as b_id,b.text as b_name,b.url as b_url2
+        select a.re_id,a.text,a.url,a.ptext,b.re_id as b_id,b.text as b_name,b.url as b_url2,b.re_pid
         from resources a left join resources b on b.re_pid=a.re_id where a.re_pid=0
     </select>
+    <delete id="removeResourceById">
+        delete from resources where re_id in
+        <foreach collection="list" item="x" open="(" separator="," close=")">
+            #{x}
+        </foreach>
+    </delete>
+    <insert id="addRes" parameterType="com.help.entity.Resource2">
+        insert into resources(re_id,text,url,re_pid)
+        values(#{re_id},#{text},#{url},#{re_pid})
+    </insert>
+    <select id="findFirstRes" resultType="com.help.entity.Resource2">
+        select re_id,text from resources where re_pid=0
+    </select>
+    <update id="editRes" parameterType="com.help.entity.Resource2">
+        update  resources set text=#{text},url=#{url},re_pid=#{re_pid}
+        where re_id = #{re_id}
+    </update>
 </mapper>

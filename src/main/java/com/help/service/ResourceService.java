@@ -18,5 +18,32 @@ public class ResourceService {
         System.out.println("2222");
         return rd.findAllResource();
     }
+    public List<Resource2> findRs() {
+        List<Resource2> rs = rd.findRs();
+        List<Resource2> data=new ArrayList<Resource2>();
+        for (Resource2 a : rs) {
+            if (a.getRe_pid()==0) {
+                data.add(a);
+            }
+            for (Resource2 b : rs) {
+                if (a.getRe_id()==b.getRe_pid()) {
+                    a.getChildren().add(b);
+                }
+            }
 
+        }
+        return data;
+    }
+    public int removeResourceById(List<Integer> data){
+        return  rd.removeResourceById(data);
+    }
+    public void addRes(Resource2 res){
+        rd.addRes(res);
+    }
+    public List<Resource2> findFirstRes(){
+        return rd.findFirstRes();
+    }
+    public void editRes(Resource2 res){
+        rd.editRes(res);
+    };
 }

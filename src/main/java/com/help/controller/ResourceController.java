@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,7 +26,34 @@ public class ResourceController {
 
         return rService.findAllResource();
     }
+    @RequestMapping("findRs.do")
+    @ResponseBody
+    public List<Resource2> findRs(){
+        return rService.findRs();
+    }
+    //删除资源
+    @RequestMapping("removeResourceById.do")
+    @ResponseBody
+    public int removeResourceById(@RequestBody ArrayList<Integer> data){
+        return rService.removeResourceById(data);
+    }
+    @RequestMapping("addRes.do")
+    @ResponseBody
+    public int addRes(Resource2 res){
 
+        rService.addRes(res);
+        return 1;
+    }
+    @RequestMapping("findFirstRes.do")
+    @ResponseBody
+    public List<Resource2> findFirstRes(){
+        return rService.findFirstRes();
+    }
+    @RequestMapping("editRes.do")
+    @ResponseBody
+    public void editRes(Resource2 res){
+        rService.editRes(res);
+    }
 //    @Resource
 //    private ResourceService rService;
 //    //所有节点
