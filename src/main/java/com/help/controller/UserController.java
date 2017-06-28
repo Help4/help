@@ -1,15 +1,18 @@
 package com.help.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.help.entity.Resource2;
 import com.help.entity.User;
 import com.help.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +23,15 @@ public class UserController {
     @Resource
     private UserService us;
 
-    @RequestMapping("findAllUser.do")
-    @ResponseBody
-    public List<User> findAllUser() {
 
-        return  us.findAllUser();
+    @RequestMapping(value = "findAllUser")
+    public void findAllUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    String page = req.getParameter("page");
+
+    List<User> rs = us.findAllUser(page);
+    String json = JSON.toJSONString(rs);
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().print(json);
     }
     //删除用户
     @RequestMapping("removeUserById.do")

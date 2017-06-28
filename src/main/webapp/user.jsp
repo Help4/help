@@ -59,6 +59,7 @@
 <script>
     function userinit() {
         $("#user_grid").datagrid({
+            pagination:true,//显示分页组件
             columns: [[
                 {field: "uid", width: 100, checkbox: true},
                 {field: "name", title: "姓名", width: 100},
@@ -87,12 +88,26 @@
                 },
             ]
         });
-        load();
+        load(1);
     }
-    function load() {
-        $.getJSON("findAllUser.do", function (data) {
+    function load(p) {
+        $.getJSON("findAllUser.do",{page:p}, function (data) {
             //给列表填充数据
             $("#user_grid").datagrid("loadData", data);
+            //获取列表的分页组件
+            var pager= $("#user_grid").datagrid("getPager");
+            //设置分页组件的参数
+            pager.pagination({
+                total:5,//总条数
+                pageNumber:p,//指定当前是第几页
+                pageSize:2,//默认条数
+                //设置页面尺寸选择数组
+                pageList:[1,2,3],
+                onSelectPage:function(page,size){
+                    //根据新页码获取数据
+                    load(page);
+                }
+            });
         });
     }
     function addUser() {

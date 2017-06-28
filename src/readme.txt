@@ -324,3 +324,59 @@ public class ResourceController{
 
 }
 
+
+//poi
+public File generateReport(String templateFile,SchemeVO schemeVO, Map inputParams) throws Exception{
+        List paramsList = null;
+        if ((inputParams!=null)&&(inputParams.size()!=0)){
+            paramsList = initInputParams(schemeVO,inputParams);
+        }else{
+           paramsList = schemeVO.getInputParamVOList();
+        }
+        HSSFSheet sheet = null;
+        HSSFWorkbook wb =null;
+        try{
+            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(templateFile));
+            wb = new HSSFWorkbook(fs);
+            sheet = wb.getSheetAt(0);
+        }catch(Exception ex){
+            throw new Exception ("parser excel file error.");
+        }
+        List dataBlockVOList = schemeVO.getDataBlockVOList();
+        for (Iterator i = dataBlockVOList.iterator(); i.hasNext(); ) {
+            DataBlockVO item =(DataBlockVO)i.next();
+            //insertDataToSheet(sheet,item,schemeVO.getInputParamVOList());
+            SQLQueryVO queryVO = item.getSqlQueryVO();
+            List columnVOList = item.getColumnVOList();
+            if (queryVO==null){//no sql query
+                for (int columnI = 0; columnI < columnVOList.size(); columnI++) {
+                    ColumnVO columnVO = (ColumnVO) columnVOList.get(columnI);
+                    String columnName = columnVO.getQueryName();
+                    for (int i1 = 0; i1 < paramsList.size(); i1++) {
+                        InputParamVO paramVO = (InputParamVO) paramsList.get(i1);
+                        String title = paramVO.getTitle();
+                        if (title.trim().compareToIgnoreCase(columnName.trim())== 0) { //equal
+                            insertDataToSheet(sheet,columnVO,paramVO.getInitValue());
+                            break;
+                        }
+                    }
+                }
+            }else{//have slq query
+                String sqlString = getSQLString(paramsList,queryVO);//get the sqlString
+                int columnCount = columnVOList.size();
+                ReportDAO reportDAO = new ReportDAO();
+                List list = reportDAO.getQueryList(sqlString,columnCount);
+                System.out.println("Listllllllllllllllllllll");
+                insertDataToSheet(sheet,columnVOList,list);
+            }
+        }
+        File file = new File(Constants.fileName);
+//        if (file.exists()){
+//            file.delete();
+//        }
+        FileOutputStream fileOut = new FileOutputStream(file);
+        wb.write(fileOut);
+        fileOut.close();
+        file.createNewFile();
+        return file;
+    }

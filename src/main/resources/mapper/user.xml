@@ -3,10 +3,17 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.help.dao.UserDao">
+<!--	&lt;!&ndash; 分页查询&ndash;&gt;
+	<select id="selectAllPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+	select top 2* from user  where not in (select top 30表名 from 主键);&#45;&#45;查询显示31-40条记录（10条）
+	</select>-->
+
 	<select id="findAllUser" resultType="com.help.entity.User">
   		select u.uid,u.name,u.gender,u.age,u.email,u.phone,r.account,org.org_name from user u
 		LEFT JOIN role r on r.rid=u.account LEFT JOIN
-		organizations org on u.org_name=org.orgid
+		organizations org on u.org_name=org.orgid limit #{p},2;
+
+
 	</select>
 	<!-- 删除用户 -->
 	<delete id="removeUserById">
