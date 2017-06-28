@@ -13,7 +13,7 @@ public class Person {
     private String p_hukou;
     private int p_homesum;
     private String p_workable;
-    private String p_state;
+    private String sta_name;
     private String p_marry;
     private String p_first;
     private String p_ill;
@@ -21,8 +21,6 @@ public class Person {
     private int p_phone;
     private String p_adress;
     private float p_monery;
-    private String p_shenheren;
-    private String p_shenpiren;
     private String p_agree;
     private String p_towm_monery;
     private String p_xian_monery;
@@ -34,7 +32,27 @@ public class Person {
         super();
     }
 
-    public Person(int pid, int identify, int p_age, String p_name, String p_gender, String p_race, String p_hukou, int p_homesum, String p_workable, String p_marry, String p_first, String p_ill, String p_trade, int p_phone, String p_adress, float p_monery, String p_shenheren, String p_shenpiren, String p_agree, String p_towm_monery, String p_xian_monery, String p_person_monery, String p_shifaqianren, String p_issendmonery) {
+    public Person(int pid, int p_age, String p_name, String p_gender, String p_race,
+                  String p_hukou, int p_homesum, String p_workable, String sta_name,
+                  String p_marry) {
+        this.pid = pid;
+        this.p_age = p_age;
+        this.p_name = p_name;
+        this.p_gender = p_gender;
+        this.p_race = p_race;
+        this.p_hukou = p_hukou;
+        this.p_homesum = p_homesum;
+        this.p_workable = p_workable;
+        this.sta_name = sta_name;
+        this.p_marry = p_marry;
+    }
+
+    public Person(int pid, int identify, int p_age, String p_name, String p_gender,
+                  String p_race, String p_hukou, int p_homesum, String p_workable,
+                  String sta_name, String p_marry, String p_first, String p_ill,
+                  String p_trade, int p_phone, String p_adress, float p_monery,
+                  String p_agree, String p_towm_monery, String p_xian_monery,
+                  String p_person_monery, String p_shifaqianren, String p_issendmonery) {
         this.pid = pid;
         this.identify = identify;
         this.p_age = p_age;
@@ -44,6 +62,7 @@ public class Person {
         this.p_hukou = p_hukou;
         this.p_homesum = p_homesum;
         this.p_workable = p_workable;
+        this.sta_name = sta_name;
         this.p_marry = p_marry;
         this.p_first = p_first;
         this.p_ill = p_ill;
@@ -51,8 +70,6 @@ public class Person {
         this.p_phone = p_phone;
         this.p_adress = p_adress;
         this.p_monery = p_monery;
-        this.p_shenheren = p_shenheren;
-        this.p_shenpiren = p_shenpiren;
         this.p_agree = p_agree;
         this.p_towm_monery = p_towm_monery;
         this.p_xian_monery = p_xian_monery;
@@ -61,40 +78,12 @@ public class Person {
         this.p_issendmonery = p_issendmonery;
     }
 
-    public Person(int pid, int identify, int p_age, String p_name, String p_gender, String p_race, String p_hukou, int p_homesum, String p_workable, String p_state, String p_marry, String p_first, String p_ill, String p_trade, int p_phone, String p_adress, float p_monery, String p_shenheren, String p_shenpiren, String p_agree, String p_towm_monery, String p_xian_monery, String p_person_monery, String p_shifaqianren, String p_issendmonery) {
-        this.pid = pid;
-        this.identify = identify;
-        this.p_age = p_age;
-        this.p_name = p_name;
-        this.p_gender = p_gender;
-        this.p_race = p_race;
-        this.p_hukou = p_hukou;
-        this.p_homesum = p_homesum;
-        this.p_workable = p_workable;
-        this.p_state = p_state;
-        this.p_marry = p_marry;
-        this.p_first = p_first;
-        this.p_ill = p_ill;
-        this.p_trade = p_trade;
-        this.p_phone = p_phone;
-        this.p_adress = p_adress;
-        this.p_monery = p_monery;
-        this.p_shenheren = p_shenheren;
-        this.p_shenpiren = p_shenpiren;
-        this.p_agree = p_agree;
-        this.p_towm_monery = p_towm_monery;
-        this.p_xian_monery = p_xian_monery;
-        this.p_person_monery = p_person_monery;
-        this.p_shifaqianren = p_shifaqianren;
-        this.p_issendmonery = p_issendmonery;
+    public String getSta_name() {
+        return sta_name;
     }
 
-    public String getP_state() {
-        return p_state;
-    }
-
-    public void setP_state(String p_state) {
-        this.p_state = p_state;
+    public void setSta_name(String sta_name) {
+        this.sta_name = sta_name;
     }
 
     public int getP_age() {
@@ -223,22 +212,6 @@ public class Person {
 
     public void setP_monery(float p_monery) {
         this.p_monery = p_monery;
-    }
-
-    public String getP_shenheren() {
-        return p_shenheren;
-    }
-
-    public void setP_shenheren(String p_shenheren) {
-        this.p_shenheren = p_shenheren;
-    }
-
-    public String getP_shenpiren() {
-        return p_shenpiren;
-    }
-
-    public void setP_shenpiren(String p_shenpiren) {
-        this.p_shenpiren = p_shenpiren;
     }
 
     public String getP_agree() {

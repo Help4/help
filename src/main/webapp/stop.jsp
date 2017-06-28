@@ -18,17 +18,18 @@
     function init() {
         $("#stop_grid").datagrid({
             columns: [[
-                {field: "pid", width: 100, checkbox: true},
-                {field: "p_name", title: "姓名", width: 100},
-                {field: "p_gender", title: "性别", width: 100},
-                {field: "p_age", title: "年龄", width: 100},
-                {field: "p_race", title: "民族", width: 100},
+                {field: "pid", width: 50, checkbox: true},
+                {field: "p_name", title: "姓名", width: 50},
+                {field: "p_gender", title: "性别", width: 50},
+                {field: "p_age", title: "年龄", width: 50},
+                {field: "p_race", title: "民族", width: 50},
                 {field: "p_hukou", title: "户口", width: 100},
-                {field: "p_homesum", title: "人口", width: 100},
+                {field: "p_homesum", title: "人口", width: 50},
                 {field: "p_marry", title: "婚姻关系", width: 100},
                 {field: "p_adress", title: "地址", width: 100},
                 {field: "p_workable", title: "劳动能力", width: 100},
-                {field: "p_state", title: "低保状态", width: 100},
+                {field: "sta_name", title: "低保状态", width: 100},
+                //{field: "sta_why", title: "理由", width: 100},
             ]],
             toolbar: [
                 {
@@ -56,6 +57,7 @@
        var d= $("#queryForm").serialize();
          alert(d);
         $.getJSON("findPersonByName.do",d,function (data) {
+            alert(data);
             //给列表填充数据
             $("#stop_grid").datagrid("loadData", data);
         });

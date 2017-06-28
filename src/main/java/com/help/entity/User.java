@@ -9,26 +9,24 @@ public class User implements Serializable {
     private int age;
     private String email;
     private int phone;
-    private String responsidle;
+    private String account;
     private String  org_name;
     public User() {
     }
 
-
-
-    public User(int uid, String name, String gender, int age, String email, int phone, String responsidle, String org_name) {
+    public User(int uid, String name, String gender, int age,
+                String email, int phone, String account, String org_name) {
         this.uid = uid;
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.email = email;
         this.phone = phone;
-        this.responsidle = responsidle;
+        this.account = account;
         this.org_name = org_name;
     }
 
     public int getUid() {
-
         return uid;
     }
 
@@ -76,12 +74,12 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getResponsidle() {
-        return responsidle;
+    public String getAccount() {
+        return account;
     }
 
-    public void setResponsidle(String responsidle) {
-        this.responsidle = responsidle;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getOrg_name() {

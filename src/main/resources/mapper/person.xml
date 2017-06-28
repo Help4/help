@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.help.dao.PersonDao">
     <select id="findPersonByName"  resultType="com.help.entity.Person">
-        select * from person where p_name=#{p_name}
+      select p.p_name,p.p_gender,p.p_age,p.p_race,p.p_hukou,p.p_homesum,p.p_marry,
+      p.p_adress,p.p_workable,st.sta_name from person p LEFT JOIN state st on
+      p.sta_name=st.sta_id where p_name=#{p_name}
     </select>
 </mapper>

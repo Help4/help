@@ -22,7 +22,7 @@ public class UserService {
    public void addUser(User user){
        ud.addUser(user);
    }
-    public void editUser(User user){
+   public void editUser(User user){
         ud.editUser(user);
     }
 }

@@ -11,9 +11,7 @@
     </select>
     <!-- 根据userid查找持有的资源模块 -->
     <select id="findReByRole" resultType="com.help.entity.Resource2">
-
         select * from resources re where re.re_pid=0 and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.r_id=ro.rid where ro.rid=#{rid})
-
     </select>
     <!-- 根据uid,pid 查找持有的资源模块 -->
     <select id="findSubByPid" resultType="com.help.entity.Resource2" parameterType="map">
@@ -23,4 +21,19 @@
     <select id="findAllRole" resultType="com.help.entity.Role">
         select * from role
     </select>
+    <!--添加角色-->
+    <insert id="addRole" parameterType="com.help.entity.Role">
+        insert into role (rid,account,pwd)values(#{rid},#{account},#{pwd})
+    </insert>
+    <!--修改角色-->
+    <update id="editRole" parameterType="com.help.entity.Role">
+        update  role set account=#{account},pwd=#{pwd} where rid =#{rid}
+    </update>
+    <!-- 删除角色 -->
+    <delete id="removeRoleById">
+        delete from role where rid in
+        <foreach collection="list" item="x" open="(" separator="," close=")">
+            #{x}
+        </foreach>
+    </delete>
 </mapper>

@@ -44,7 +44,8 @@
         </div>
         <div class="input-group">
             <span class="input-group-addon">权限</span>
-            <input id="user_des" type="text" name="responsidle" class="form-control"/>
+            <select id="user_des" class="form-control" name="account">
+            </select>
         </div>
         <div class="input-group">
             <span class="input-group-addon">部门</span>
@@ -65,7 +66,7 @@
                 {field: "age", title: "年龄", width: 100},
                 {field: "email", title: "邮箱", width: 100},
                 {field: "phone", title: "电话", width: 100},
-                {field: "responsidle", title: "权限（是/否）", width: 100},
+                {field: "account", title: "角色", width: 100},
                 {field: "org_name", title: "部门", width: 100},
             ]],
             toolbar: [
@@ -83,7 +84,7 @@
                     text: "删除", iconCls: "icon-remove", handler: function () {
                     remove();
                 }
-                }
+                },
             ]
         });
         load();
@@ -96,15 +97,22 @@
     }
     function addUser() {
         var x = $("#user_grid").datagrid("getSelected");
-
         $.getJSON("findAll_Org.do", function (json) {
-
             //把普通string解析为json对象
              var op="";
              for(var i in json){
                  op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
              }
              $("#user_org").html(op);
+        })
+        $.getJSON("findAllRole.do", function (json) {
+            //alert(json);
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].rid+">"+json[i].account+"</option>";
+            }
+            $("#user_des").html(op);
         })
 
         $("#user_id").val(0);
@@ -120,35 +128,18 @@
         var y = $("#user_grid").datagrid("getSelected");
         var x = $("#user_form").serialize();
             if(y!=null) {
-
                 $.get("editUser.do", x, function (d) {
-
                     $("#user_alert").window("close");
                     //重新加载数据
                     load();
                 });
             }else {
-            $.post("au.do",x, function (d) {
+            $.post("addUser.do",x, function (d) {
                 $("#user_alert").window("close");
                 //重新加载数据
                 load();
             });
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     function remove() {
@@ -186,32 +177,44 @@
     }
 
     function edit() {
-        var x = $("#user_grid").datagrid("getSelected");
+        var x = $("#user_grid").datagrid("getSelections");
+        alert(x.length);
+        if(x.length==1){
+            $("#user_id").val(x[0].uid);
+            $("#user_name").val(x[0].name);
+            $("#user_age").val(x[0].age);
+            $("#user_email").val(x[0].email);
+            $("#user_des").val(x[0].responsidle);
+            $("#user_gender").val(x[0].gender);
+            $("#user_phone").val(x[0].phone);
 
-        if(x.uid!=0){
-            $("#user_id").val(x.uid);
-            $("#user_name").val(x.name);
-            $("#user_age").val(x.age);
-            $("#user_email").val(x.email);
-            $("#user_des").val(x.responsidle);
-            $("#user_gender").val(x.gender);
-            $("#user_phone").val(x.phone);
-
-            $.getJSON("", function (json) {
+            $.getJSON("findAll_Org.do", function (json) {
                 //把普通string解析为json对象
                 var op="";
                 for(var i in json){
-                    if(json[i].org_name==x.org_name){
+                    if(json[i].org_name==x[0].org_name){
                         op+="<option selected = \"selected\" value="+json[i].orgid+">"+json[i].org_name+"</option>";
                     }
                     op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
                 }
-
                 $("#user_org").html(op);
             })
-
+            $.getJSON("findAllRole.do", function (json) {
+                alert(json);
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    if(json[i].account==x[0].account){
+                        op+="<option selected = \"selected\" value="+json[i].rid+">"+json[i].account+"</option>";
+                    }
+                    op+="<option value="+json[i].rid+">"+json[i].account+"</option>";
+                }
+                $("#user_des").html(op);
+            })
             //弹出窗口
             $("#user_alert").window("open");
+        }else{
+            $.messager.alert("系统提示：","请选择一个账户");
         }
     }
     $(userinit);

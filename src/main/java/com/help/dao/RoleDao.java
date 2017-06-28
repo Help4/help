@@ -16,4 +16,10 @@ public interface RoleDao {
     public Role findRole(String account);
     public List<Resource2> findReByRole(int rid);
     public List<Resource2> findSubByPid(Map<String,Integer> map);
+    //添加角色
+    public void addRole(Role role);
+    //修改角色
+    public void editRole(Role role);
+    //删除角色
+    public int removeRoleById(List<Integer> data);
 }

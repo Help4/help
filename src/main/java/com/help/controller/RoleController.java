@@ -13,6 +13,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,5 +80,25 @@ public class RoleController {
     @ResponseBody
     public List<Role> findAllRole(){
         return rs.findAllRole();
+    };
+    //添加用户
+    @RequestMapping("addRole.do")
+    @ResponseBody
+    public int  addRole(Role role){
+        rs.addRole(role);
+        return 1;
+    };
+    //修改用户
+    @RequestMapping("editRole.do")
+    @ResponseBody
+    public int  editRole(Role role){
+        rs.editRole(role);
+        return 1;
+    };
+    //删除角色
+    @RequestMapping("removeRoleById.do")
+    @ResponseBody
+    public int removeRoleById(@RequestBody ArrayList<Integer> data){
+         return rs.removeRoleById(data);
     };
 }

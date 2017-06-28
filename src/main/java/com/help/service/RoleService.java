@@ -17,16 +17,20 @@ public class RoleService {
         return rd.findRole(account);
     }
   public List<Resource2> findReByRole(int rid){
-
     return rd.findReByRole(rid);
   }
-
   public List<Resource2>  findSubByPid( Map<String,Integer> map){
-
        return rd.findSubByPid(map);
   }
   public List<Role> findAllRole(){
       return rd.findAllRole();
   };
-
+    //添加角色
+    public void addRole(Role role){
+        rd.addRole(role);
+    };
+    //修改角色
+    public void editRole(Role role){rd.editRole(role);};
+    //删除角色
+    public int removeRoleById(List<Integer> data){return rd.removeRoleById(data);};
 }

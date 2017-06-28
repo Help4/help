@@ -20,7 +20,7 @@ public class UserController {
     @Resource
     private UserService us;
 
-    @RequestMapping("/findAllUser.do")
+    @RequestMapping("findAllUser.do")
     @ResponseBody
     public List<User> findAllUser() {
 
@@ -34,23 +34,19 @@ public class UserController {
     }
 
     //添加用户
-    @RequestMapping(value = "au.do",method= RequestMethod.POST)
+    @RequestMapping(value = "addUser.do",method= RequestMethod.POST)
     @ResponseBody
     public int addUser(User user){
         System.out.println("user:"+user.getOrg_name());
          us.addUser(user);
     return 1;
     }
-
     //修改用户
     @RequestMapping("editUser.do")
     @ResponseBody
     public int editdUser(User user){
-
-
                us.editUser(user);
-
-
         return 1;
     }
+
 }
