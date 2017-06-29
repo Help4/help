@@ -90,6 +90,7 @@
         });
         load(1);
     }
+    var page2=null;
     function load(p) {
         $.getJSON("findAllUser.do",{page:p}, function (data) {
             //给列表填充数据
@@ -99,12 +100,13 @@
             //设置分页组件的参数
             pager.pagination({
                 total:5,//总条数
-                pageNumber:p,//指定当前是第几页
+                pageNumber:page2,//指定当前2是第几页
                 pageSize:2,//默认条数
                 //设置页面尺寸选择数组
-                pageList:[1,2,3],
+                pageList:[1,2,3,4,5,6,7],
                 onSelectPage:function(page,size){
                     //根据新页码获取数据
+                    page2=page;
                     load(page);
                 }
             });
@@ -146,13 +148,13 @@
                 $.get("editUser.do", x, function (d) {
                     $("#user_alert").window("close");
                     //重新加载数据
-                    load();
+                    load(page2);
                 });
             }else {
             $.post("addUser.do",x, function (d) {
                 $("#user_alert").window("close");
                 //重新加载数据
-                load();
+                load(page2);
             });
             }
     }
@@ -174,8 +176,8 @@
             data: d,
             contentType: "application/json",
             success: function (data) {
-                alert(data);
-                load();
+
+                load(page2);
             }
         });
     }
@@ -228,6 +230,7 @@
             })
             //弹出窗口
             $("#user_alert").window("open");
+
         }else{
             $.messager.alert("系统提示：","请选择一个账户");
         }

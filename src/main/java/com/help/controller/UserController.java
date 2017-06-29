@@ -44,7 +44,7 @@ public class UserController {
     @RequestMapping(value = "addUser.do",method= RequestMethod.POST)
     @ResponseBody
     public int addUser(User user){
-        System.out.println("user:"+user.getOrg_name());
+       // System.out.println("user:"+user.getOrg_name());
          us.addUser(user);
     return 1;
     }

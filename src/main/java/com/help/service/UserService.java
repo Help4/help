@@ -15,7 +15,7 @@ public class UserService {
    private UserDao ud;
    public List<User> findAllUser(String page){
        int p=Integer.parseInt(page);
-       return  ud.findAllUser((p-1)*2);
+       return  ud.findAllUser((p-1)*5);
    }
    public int removeUserById(List<Integer> data){
        return  ud.removeUserById(data);
