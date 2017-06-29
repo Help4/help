@@ -7,9 +7,40 @@
     <select id="search"  resultType="com.help.entity.Organizations">
         select * from organizations
     </select>
-
-    <select id="find"  resultType="com.help.entity.Organizations">
-        select * from organizations
+    <!--获取所有节点及其父节点-->
+    <resultMap type="com.help.entity.Organizations" id="map_organization">
+        <result property="orgid" column="orgid" />
+        <result property="org_name" column="org_name" />
+        <result property="org_description" column="org_description" />
+        <result property="org_parentId" column="org_parentId"/>
+        <collection property="children" ofType="com.help.entity.Organizations">
+            <result property="orgid" column="b_id" />
+            <result property="org_name" column="b_name" />
+            <result property="org_description" column="b_description" />
+            <result property="org_parentId" column="b_parentId"/>
+        </collection>
+    </resultMap>
+    <select id="findAllOrganization" resultMap="map_organization">
+        select a.orgid,a.org_name,a.org_description,a.org_parentId,b.orgid as b_id,b.org_name as b_name,b.org_description as b_description,
+        b.org_parentId as b_parentId from organizations a left join organizations b on b.org_parentId=a.orgid where a.org_parentId=1
     </select>
-
+    <!--查询县市级组织-->
+    <select id="findParOrg" resultType="com.help.entity.Organizations">
+    select orgid,org_name from organizations where org_parentId in (0,1)
+    </select>
+    <!--添加组织-->
+    <insert id="addOrg" parameterType="com.help.entity.Organizations">
+        insert into organizations (orgid,org_name,org_description,org_parentId)values(#{orgid},#{org_name},#{org_description},#{org_parentId})
+    </insert>
+    <!--修改组织-->
+    <update id="editOrg" parameterType="com.help.entity.Organizations">
+        update  organizations set org_name=#{org_name},org_description=#{org_description},org_parentId=#{org_parentId} where orgid =#{orgid}
+    </update>
+    <!--删除组织-->
+    <delete id="removeOrg">
+        delete from organizations where orgid in
+        <foreach collection="list" item="x" open="(" separator="," close=")">
+            #{x}
+        </foreach>
+    </delete>
 </mapper>

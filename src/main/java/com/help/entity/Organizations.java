@@ -9,16 +9,20 @@ public class Organizations implements Serializable {
     private String org_name;
     private String org_description;
     private int org_parentId;
-
     private Set<Organizations> children=new HashSet<Organizations>();
 
-    public Set<Organizations> getChildren() {
-        return children;
+    public Organizations() {
+        super();
     }
 
-    public void setChildren(Set<Organizations> children) {
-        this.children = children;
+    public Organizations(int orgid, String org_name, String org_description, int org_parentId) {
+        this.orgid = orgid;
+        this.org_name = org_name;
+        this.org_description = org_description;
+        this.org_parentId = org_parentId;
+
     }
+
 
     public int getOrgid() {
         return orgid;
@@ -52,13 +56,11 @@ public class Organizations implements Serializable {
         this.org_parentId = org_parentId;
     }
 
-    public Organizations() {
+    public Set<Organizations> getChildren() {
+        return children;
     }
 
-    public Organizations(int orgid, String org_name, String org_description, int org_parentId) {
-        this.orgid = orgid;
-        this.org_name = org_name;
-        this.org_description = org_description;
-        this.org_parentId = org_parentId;
+    public void setChildren(Set<Organizations> children) {
+        this.children = children;
     }
 }

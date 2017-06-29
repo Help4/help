@@ -44,7 +44,7 @@
     function res_load(){
         $.getJSON("findAllResource.do",function(data){
             //给列表填充数据
-
+            alert(data)
             $("#res_grid").treegrid("loadData",data);
         });
     }
@@ -72,11 +72,6 @@
     }
     function addRes(){
         $.getJSON("findFirstRes.do", function (json) {
-
-
-
-
-
             var op="";
             for(var i in json){
                 op+="<option value="+json[i].re_id+">"+json[i].text+"</option>";

@@ -18,23 +18,23 @@ public class OrganizationService {
         return od.search();
     }
 
-
-
-    public List<Organizations> find() {
-        List<Organizations> list= od.find();
-        List<Organizations> data=new ArrayList<Organizations>();
-        for (Organizations a : list) {
-            if (a.getOrg_parentId()==0) {
-                data.add(a);
-            }
-            for (Organizations b : list) {
-                if (a.getOrgid()==b.getOrg_parentId()) {
-                    a.getChildren().add(b);
-                }
-            }
-
-        }
-        return data;
-    }
+    public List<Organizations> findAllOrganization(Organizations organizations) {
+        return od.findAllOrganization(organizations);
+      };
+    public List<Organizations> findParOrg(Organizations organizations){
+        return od.findParOrg(organizations);
+    };
+    //删除资源
+    public int removeOrg(List<Integer> data){
+        return od.removeOrg(data);
+    };
+    //添加资源
+    public void addOrg(Organizations organizations){
+        od.addOrg(organizations);
+    };
+    //修改资源
+    public void editOrg(Organizations organizations){
+        od.editOrg(organizations);
+    };
 }
 

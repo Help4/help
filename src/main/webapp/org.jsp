@@ -1,98 +1,139 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <div id="org_grid"></div>
-<div id="qx_window" class="easyui-window" data-options="closed:true,modal:true" style="width:300px;height:400px">
-    <div style="width:100%;height:90%;padding:30px 30px">
-        <ul id="qx_tree" class="easyui-tree" data-options="url:'fi.do?userid=32',checkbox:true,cascadeCheck:false"></ul>
-    </div>
-    <div style="display:flex;justify-content:center">
-        <a class="easyui-linkbutton" onclick="qx_save()">保 &nbsp;&nbsp;&nbsp;存</a>
-    </div>
-
+<div id="org_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:300px">
+    <form id="org_form" class="form-group" style="margin: 10px">
+        <input id="org_id" type="hidden" name="orgid" value="0"/>
+        <div class="input-group">
+            <span class="input-group-addon">组织名</span>
+            <input id="org_name" type="text" name="org_name" class="form-control"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">描述</span>
+            <input id="org_des" type="text" name="org_description" class="form-control"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">上级</span>
+            <select id="parent" class="form-control" name="org_parentId">
+            </select>
+        </div>
+        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+    </form>
 </div>
-<script>
-    var userid=0;
-    function init(){
-        $("#org_grid").datagrid({
-
+<script type="text/javascript">
+    function orginit(){
+        $("#org_grid").treegrid({
+            idField:"orgid",
+            treeField:"org_name",
+            singleSelect : false,
             columns:[[
-
                 {field:"orgid",width:100,checkbox:true},
-                {field:"org_name",title:"部门",width:100},
-                {field:"org_description",title:"部门信息",width:100},
-                {field:"org_parentId",title:"父节点",width:100}
+                {field:"org_name",title:"组织名",width:150},
+                {field:"org_description",title:"描述",width:200},
+                {field:"org_parentId",title:"上级",width:100},
             ]],
             toolbar:[
-                {text:"添加",iconCls:"icon-add"},
-                {text:"修改",iconCls:"icon-edit"},
-                {text:"删除",iconCls:"icon-remove",handler:function(){remove();}},
-                {text:"分配权限",iconCls:"icon-search",handler:function(){qx_show();}}
-
+                {text:"添加",iconCls:"icon-add",handler:function(){addOrg();}},
+                {text:"修改",iconCls:"icon-edit",handler:function(){editOrg();}},
+                {text:"删除",iconCls:"icon-remove",handler:function(){removeOrg();}},
             ]
         });
-        load();
+        orgload();
     }
-    function load(){
-        $.getJSON("findAll_Org.do",function(data){
+    function orgload(){
+        $.getJSON("findAllOrganization.do",function(data){
             //给列表填充数据
-
-            $("#org_grid").datagrid("loadData",data);
+            $("#org_grid").treegrid("loadData",data);
         });
     }
-    //删除
-    function remove(){
-        //获取选择的数据
-        var rows= $("#org_grid").datagrid("getSelections");
-        //创建一个数组
-        var as=[];
-        for(var i in rows){
-            as[i]=rows[i].id;
-        }
-        //转换为json
-        var d=JSON.stringify(as);
-        //提交数据到服务端
-        $.ajax({
-            url:"removeUserById.do",
-            method:"post",
-            data:d,
-            contentType:"application/json",
-            success:function(data){
-                alert(data);
-                load();
+    function addOrg(){
+        $.getJSON("findParOrg.do", function (json) {
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
             }
-        });
+            $("#parent").html(op);
+        })
+        $("#org_alert").window("open");
     }
-    //弹出窗口
-    function qx_show(){
-        var rows=$("#org_grid").datagrid("getSelections");
-        if(rows.length==1){
-            //显示window
-            $("#qx_window").window("open");
+    function save() {
+        var x=$("#org_form").serialize()
+        var y= $("#org_grid").treegrid("getSelected");
+       // alert(x);
+        if(y!=null){
+            $.get("editOrg.do", x, function (d) {
+                $("#org_alert").window("close");
+                //重新加载数据
+                orgload();
+            });
         }else{
-            $.messager.alert("系统提示","请选择唯一一个账号");
-        }
+            $.get("addOrg.do", x, function (d) {
 
-    }
-    //保存
-    function qx_save(){
-        var user=$("#org_grid").datagrid("getSelected");
-        //获取选择的节点
-        var nodes= $("#qx_tree").tree("getChecked");
-        var as=[];
-        for(var x in nodes){
-            var o={userid:user.id,resourceid:nodes[x].id};
-            as[x]=o;
+                $("#org_alert").window("close");
+                //重新加载数据
+                orgload();
+            });
         }
-        var json=JSON.stringify(as);
-        //提交
-        $.ajax({
-            url:"fenpei.do",
-            method:"post",
-            data:json,
-            contentType:"application/json",
-            success:function(d){
-                alert(d);
+    }
+    function editOrg() {
+        var x = $("#org_grid").treegrid("getSelections");
+        alert(x[0].orgid)
+        if(x.length==1){
+            $("#org_id").val(x[0].orgid);
+            $("#org_name").val(x[0].org_name);
+            $("#org_des").val(x[0].org_description);
+            $("#parent").val(x[0].org_parentId);
+
+            $.getJSON("findParOrg.do", function (json) {
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    if(json[i].orgid==x[0].org_parentId){
+                        op+="<option selected = \"selected\" value="+json[i].orgid+">"+json[i].org_name+"</option>";
+                    }
+                    op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
+                }
+
+                $("#parent").html(op);
+            })
+
+            //弹出窗口
+            $("#org_alert").window("open");
+        }else{
+            $.messager.alert("系统提示", "请选择唯一一个账号");
+        }
+    }
+    function removeOrg() {
+        var rows = $("#org_grid").treegrid("getSelections");
+        alert(rows[0].orgid);
+        //创建一个数组
+        var as = [];
+        for (var i in rows) {
+            as[i] = rows[i].orgid;
+        }
+       //转换为json
+        var d = JSON.stringify(as);
+        //提交数据到服务端
+       $.ajax({
+            url: "removeOrg.do",
+            method: "post",
+            data: d,
+            contentType: "application/json",
+            success: function (data) {
+                alert(data);
+                orgload();
             }
         });
     }
-    init();
+    $(orginit);
 </script>
+
+
+
+
+
+
+
+
+
+
