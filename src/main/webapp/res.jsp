@@ -90,17 +90,18 @@
     function res_save() {
         var x = $("#res_form").serialize();
         var y= $("#res_grid").treegrid("getSelected");
-        //  alert(x);
-        if(y==0){
-            $.get("addRes.do", x, function (d) {
+
+
+        if(y!=null){
+
+            $.get("editRes.do", x, function (d) {
 
                 $("#res_alert").window("close");
                 //重新加载数据
                 res_load();
             });
-
         }else{
-            $.get("editRes.do", x, function (d) {
+            $.get("addRes.do", x, function (d) {
 
                 $("#res_alert").window("close");
                 //重新加载数据
