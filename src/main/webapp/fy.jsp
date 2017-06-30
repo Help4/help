@@ -34,7 +34,7 @@
                     pageNumber:p,//指定当前是第几页
                     pageSize:2,//默认条数
                     //设置页面尺寸选择数组
-                    pageList:[1,2,3],
+                    pageList:[1,2,3,4,5,6,7,8,9,10,],
                     onSelectPage:function(page,size){
                         //根据新页码获取数据
                         load(page);

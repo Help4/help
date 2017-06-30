@@ -9,20 +9,29 @@ public class Organizations implements Serializable {
     private String org_name;
     private String org_description;
     private int org_parentId;
+    private String pname;
     private Set<Organizations> children=new HashSet<Organizations>();
 
     public Organizations() {
         super();
     }
 
-    public Organizations(int orgid, String org_name, String org_description, int org_parentId) {
+    public Organizations(int orgid, String org_name, String org_description, int org_parentId, String pname, Set<Organizations> children) {
         this.orgid = orgid;
         this.org_name = org_name;
         this.org_description = org_description;
         this.org_parentId = org_parentId;
-
+        this.pname = pname;
+        this.children = children;
     }
 
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
 
     public int getOrgid() {
         return orgid;

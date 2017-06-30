@@ -125,6 +125,11 @@
                     text: "删除", iconCls: "icon-remove", handler: function () {
                     removeDang();
                 }
+                },
+                {
+                    text: "刷新", iconCls: "icon-remove", handler: function () {
+                    reflash();
+                }
                 }
 
             ]
@@ -137,23 +142,14 @@
             $("#dangan_grid").datagrid("loadData", data);
         });
     }
+    function reflash() {
+        load();
+    }
     function clearQueryForm(){
         $("#queryForm").form("clear");
     }
     function addDang(){
        var x = $("#dangan_grid").datagrid("getSelected");
-//
-//        $.getJSON("findPerson.do", function (json) {
-//            //alert(json);
-//            //把普通string解析为json对象
-//            var op="";
-//            for(var i in json){
-//                op+="<option value="+json[i].rid+">"+json[i].account+"</option>";
-//            }
-//            $("#user_des").html(op);
-//        })
-//
-
         $("#dangan_name").val(x);
         $("#dangan_gender").val(x);
         $("#dangan_age").val(x);
@@ -174,7 +170,6 @@
 
     function query() {
         var d= $("#queryForm").serialize();
-
         $.getJSON("findPersonByName.do",d,function (data) {
             //给列表填充数据
             $("#dangan_grid").datagrid("loadData", data);

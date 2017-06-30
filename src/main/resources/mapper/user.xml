@@ -33,5 +33,4 @@
 		update  user set name=#{name},gender=#{gender},age=#{age},email=#{email},phone=#{phone},account=#{account},org_name=#{org_name}
 	where uid = #{uid}
 	</update>
-
 </mapper>

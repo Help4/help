@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+
 @Service
 public class UserService {
 
@@ -18,7 +19,7 @@ public class UserService {
        return  ud.findAllUser((p-1)*5);
    }
    public int removeUserById(List<Integer> data){
-       return  ud.removeUserById(data);
+       return ud.removeUserById(data);
    }
    public void addUser(User user){
        ud.addUser(user);

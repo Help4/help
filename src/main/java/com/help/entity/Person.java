@@ -27,6 +27,62 @@ public class Person {
     private String p_person_monery;
     private String p_shifaqianren;
     private String p_issendmonery;
+    private String why;
+    private int sta_id;
+    private int wid;
+
+    public Person(int pid, int identify, int p_age, String p_name, String p_gender, String p_race, String p_hukou, int p_homesum, String p_workable, String sta_name, String p_marry, String p_first, String p_ill, String p_trade, int p_phone, String p_adress, float p_monery, String p_agree, String p_towm_monery, String p_xian_monery, String p_person_monery, String p_shifaqianren, String p_issendmonery, String why, int sta_id, int wid) {
+        this.pid = pid;
+        this.identify = identify;
+        this.p_age = p_age;
+        this.p_name = p_name;
+        this.p_gender = p_gender;
+        this.p_race = p_race;
+        this.p_hukou = p_hukou;
+        this.p_homesum = p_homesum;
+        this.p_workable = p_workable;
+        this.sta_name = sta_name;
+        this.p_marry = p_marry;
+        this.p_first = p_first;
+        this.p_ill = p_ill;
+        this.p_trade = p_trade;
+        this.p_phone = p_phone;
+        this.p_adress = p_adress;
+        this.p_monery = p_monery;
+        this.p_agree = p_agree;
+        this.p_towm_monery = p_towm_monery;
+        this.p_xian_monery = p_xian_monery;
+        this.p_person_monery = p_person_monery;
+        this.p_shifaqianren = p_shifaqianren;
+        this.p_issendmonery = p_issendmonery;
+        this.why = why;
+        this.sta_id = sta_id;
+        this.wid = wid;
+    }
+
+    public int getWid() {
+        return wid;
+    }
+
+    public void setWid(int wid) {
+        this.wid = wid;
+    }
+
+    public int getSta_id() {
+        return sta_id;
+    }
+
+    public void setSta_id(int sta_id) {
+        this.sta_id = sta_id;
+    }
+
+    public String getWhy() {
+        return why;
+    }
+
+    public void setWhy(String why) {
+        this.why = why;
+    }
 
     public Person() {
         super();

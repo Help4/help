@@ -11,6 +11,5 @@
         select p.*,s.sta_name ,r.why FROM person p LEFT JOIN person_state ps
       on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid
       where p_name=#{p_name}
-
     </select>
 </mapper>

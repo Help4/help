@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.help.dao.StopDao">
+    <select id="findAllState" resultType="com.help.entity.State">
+        SELECT * FROM state
+    </select>
+    <select id="findAllWhy" resultType="com.help.entity.Reason">
+        SELECT * FROM reason
+    </select>
+    <update id="editState" parameterType="com.help.entity.Person_State_Reason">
+       UPDATE person_state ps set ps.sta_id=#{sta_name},ps.wid=#{why} WHERE ps.pid=#{pid}
+    </update>
+</mapper>
