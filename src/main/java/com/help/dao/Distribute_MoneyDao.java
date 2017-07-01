@@ -12,5 +12,7 @@ import java.util.List;
 public interface Distribute_MoneyDao {
     public List<Distribute_Money> findMoneyByNp(String native_place);
     public List<Distribute_Money> findMoney();
+    public void editwork(Distribute_Money distribute_money);
     public void addwork(Distribute_Money distribute_money);
+    public int removeMoneyById(List<Integer> data);
 }

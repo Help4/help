@@ -19,5 +19,7 @@ public class Distribute_MoneyService {
         return dmd.findMoneyByNp(native_place);
     };
     public List<Distribute_Money> findMoney(){return dmd.findMoney();};
+    public void editwork(Distribute_Money distribute_money){dmd.editwork(distribute_money);};
     public void addwork(Distribute_Money distribute_money){dmd.addwork(distribute_money);};
+    public int removeMoneyById(List<Integer> data){return dmd.removeMoneyById(data);};
 }

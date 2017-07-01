@@ -14,15 +14,15 @@
     <insert id="addwork" parameterType="com.help.entity.Distribute_Money">
         insert into distribute_money(money_id,native_place,money_shiDistribute,shi,money_xianDistribute,xian,money_xiangDistribute,xiang,money_personGet,money_Getsum,dissribute_DATE) values(#{money_id},#{native_place},#{money_shiDistribute},#{shi},#{money_xianDistribute},#{xian},#{money_xiangDistribute},#{xiang},#{money_personGet},#{money_Getsum},#{dissribute_DATE})
     </insert>
-    <!--&lt;!&ndash;修改组织&ndash;&gt;-->
-    <!--<update id="editOrg" parameterType="com.help.entity.Organizations">-->
-        <!--update  organizations set org_name=#{org_name},org_description=#{org_description},org_parentId=#{org_parentId} where orgid =#{orgid}-->
-    <!--</update>-->
-    <!--&lt;!&ndash;删除组织&ndash;&gt;-->
-    <!--<delete id="removeOrg">-->
-        <!--delete from organizations where orgid in-->
-        <!--<foreach collection="list" item="x" open="(" separator="," close=")">-->
-            <!--#{x}-->
-        <!--</foreach>-->
-    <!--</delete>-->
+    <!--修改任务-->
+    <update id="editwork" parameterType="com.help.entity.Distribute_Money">
+        update  distribute_money set native_place=#{native_place},money_shiDistribute=#{money_shiDistribute},shi=#{shi},money_xianDistribute=#{money_xianDistribute},xian=#{xian},money_xiangDistribute=#{money_xiangDistribute},xiang=#{xiang},money_personGet=#{money_personGet},money_Getsum=#{money_Getsum},dissribute_DATE=#{dissribute_DATE} where money_id=#{money_id}
+    </update>
+    <!--删除组织-->
+    <delete id="removeMoneyById">
+        delete from distribute_money where money_id in
+        <foreach collection="list" item="x" open="(" separator="," close=")">
+            #{x}
+       </foreach>
+    </delete>
 </mapper>

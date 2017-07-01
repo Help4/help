@@ -95,10 +95,15 @@
                 }
                 },
                 {
-                    text: "待办任务", iconCls: "icon-edit", handler: function () {
-                    todowork();
+                    text: "删除任务", iconCls: "icon-remove", handler: function () {
+                    removework();
                 }
                 },
+//                {
+//                    text: "待办任务", iconCls: "icon-edit", handler: function () {
+//                    todowork();
+//                }
+//                },
                 {
                     text: "刷新", iconCls: "icon-edit", handler: function () {
                     reflash();
@@ -136,37 +141,82 @@
         $("#queryForm2").form("clear");
     }
     function addwork(){
-       // var x = $("#fa_grid").datagrid("getSelections");
-    //    alert("add1"+x[0].monery_id);
-//       if(x.length==1){
-//            //弹出窗口
-//            $("#fa_alert").window("open");
-//       }else{
-//            $.messager.alert("系统提示：","请选择一个账户");
-//        }
-//        $("#fa_id").val(x[0].monery_id);
-//        $("#fa_native_place").val(x[0].native_place);
-//        $("#fa_monery_shiDistribute").val(x[0].monery_shiDistribute);
-//        $("#fa_shi").val(x[0].shi);
-//        $("#fa_monery_xianDistribute").val(x[0].monery_xianDistribute);
-//        $("#fa_xian").val(x[0].xian);
-//        $("#fa_monery_xiangDistribute").val(x[0].monery_xiangDistribute);
-//        $("#fa_xiang").val(x[0].xiang);
-//        $("#fa_monery_Getsum").val(x[0].monery_Getsum);
-//        $("#fa_dissribute_DATE").val(x[0].dissribute_DATE);
+        var x = $("#fa_grid").datagrid("getSelected");
+        $("#fa_id").val(0);
+        $("#fa_native_place").val(x);
+        $("#fa_money_shiDistribute").val(x);
+        $("#fa_shi").val(x);
+        $("#fa_money_xianDistribute").val(x);
+        $("#fa_xian").val(x);
+        $("#fa_money_xiangDistribute").val(x);
+        $("#fa_xiang").val(x);
+        $("#fa_money_Getsum").val(x);
+        $("#fa_money_personGet").val(x);
+        $("#fa_dissribute_DATE").val(x);
         $("#fa_alert").window("open");
     }
     function save(){
-        //var x = $("#fa_grid").datagrid("getSelections");
-      //  alert("save1"+x[0].pid);
-        var s=$("#fa_form").serialize();
-        alert("sava2"+s);
-        $.get("addwork.do",s, function (d) {
-            //alert(d);
-            $("#fa_alert").window("close");
-            //重新加载数据
-            query2();
-       });
+        var y = $("#fa_grid").datagrid("getSelected");
+        var x=$("#fa_form").serialize();
+        alert("y"+y);
+        alert("sava2"+x);
+        alert("kk");
+        if(y!=null){
+            $.get("editwork.do", x, function (d) {
+                alert("22");
+                $("#fa_alert").window("close");
+                //重新加载数据
+                query2();
+            });
+        }else{
+            $.post("addwork.do",x, function (d) {
+                alert("33");
+                $("#fa_alert").window("close");
+                //重新加载数据
+                query2();
+            });
+        }
+    }
+    function editwork() {
+        var x = $("#fa_grid").datagrid("getSelections");
+        //alert(x.length);
+        if (x.length == 1) {
+            $("#fa_id").val(x[0].money_id);
+            $("#fa_native_place").val(x[0].native_place);
+            $("#fa_money_shiDistribute").val(x[0].money_shiDistribute);
+            $("#fa_shi").val(x[0].shi);
+            $("#fa_money_xianDistribute").val(x[0].money_xianDistribute);
+            $("#fa_xian").val(x[0].xian);
+            $("#fa_money_xiangDistribute").val(x[0].money_xiangDistribute);
+            $("#fa_xiang").val(x[0].xiang);
+            $("#fa_money_Getsum").val(x[0].money_Getsum);
+            $("#fa_money_personGet").val(x[0].money_personGet);
+            $("#fa_dissribute_DATE").val(x[0].dissribute_DATE);
+            $("#fa_alert").window("open");
+        } else {
+            $.messager.alert("系统提示：", "请选择一个账户");
+        }
+    }
+    function removework() {
+        var rows = $("#fa_grid").datagrid("getSelections");
+        alert(rows[0].money_id);
+        //创建一个数组
+        var as = [];
+        for (var i in rows) {
+            as[i] = rows[i].money_id;
+        }
+        //转换为json
+        var d = JSON.stringify(as);
+        //提交数据到服务端
+        $.ajax({
+            url: "removeMoneyById.do",
+            method: "post",
+            data: d,
+            contentType: "application/json",
+            success: function (data) {
+                load();
+            }
+        });
     }
     $(fainit);
 </script>

@@ -3,10 +3,12 @@ package com.help.controller;
 import com.help.entity.Distribute_Money;
 import com.help.service.Distribute_MoneyService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,5 +35,16 @@ public class Distribute_MoneyController {
     public int addwork(Distribute_Money distribute_money){
         dms.addwork(distribute_money);
         return 1;
+    };
+    @RequestMapping("editwork.do")
+    @ResponseBody
+    public int editwork(Distribute_Money distribute_money){
+        dms.editwork(distribute_money);
+        return 1;
+    };
+    @RequestMapping("removeMoneyById.do")
+    @ResponseBody
+    public int removeMoneyById(@RequestBody ArrayList<Integer> data){
+        return dms.removeMoneyById(data);
     };
 }
