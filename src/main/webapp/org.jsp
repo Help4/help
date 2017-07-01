@@ -35,8 +35,16 @@
                 {text:"添加",iconCls:"icon-add",handler:function(){addOrg();}},
                 {text:"修改",iconCls:"icon-edit",handler:function(){editOrg();}},
                 {text:"删除",iconCls:"icon-remove",handler:function(){removeOrg();}},
+                {
+                    text: "刷新", iconCls: "icon-edit", handler: function () {
+                    reflash();
+                }
+                },
             ]
         });
+        orgload();
+    }
+    function reflash(){
         orgload();
     }
     function orgload(){
@@ -77,7 +85,7 @@
     }
     function editOrg() {
         var x = $("#org_grid").treegrid("getSelections");
-        alert(x[0].orgid)
+       //alert(x[0].orgid)
         if(x.length==1){
             $("#org_id").val(x[0].orgid);
             $("#org_name").val(x[0].org_name);
@@ -105,7 +113,7 @@
     }
     function removeOrg() {
         var rows = $("#org_grid").treegrid("getSelections");
-        alert(rows[0].orgid);
+        //alert(rows[0].orgid);
         //创建一个数组
         var as = [];
         for (var i in rows) {
@@ -120,7 +128,7 @@
             data: d,
             contentType: "application/json",
             success: function (data) {
-                alert(data);
+                //alert(data);
                 orgload();
             }
         });

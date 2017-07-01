@@ -13,7 +13,6 @@
     </form>
 </div>
 <div id="dangan_grid"></div>
-
 <div id="dangan_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
     <form id="dangan_form" class="form-group" style="margin: 10px">
         <input id="dangan_id" type="hidden" name="uid" value="0"/>
@@ -90,7 +89,7 @@
 </div>
 
 <script>
-    function init() {
+    function danginit() {
         $("#dangan_grid").datagrid({
             columns: [[
                 {field: "pid", width: 100, checkbox: true},
@@ -134,16 +133,16 @@
 
             ]
         });
-        load();
+        dangload();
     }
-    function load() {
+    function dangload() {
         $.getJSON("findPerson.do", function (data) {
             //给列表填充数据
             $("#dangan_grid").datagrid("loadData", data);
         });
     }
-    function reflash() {
-        load();
+    function reflash(){
+        dangload();
     }
     function clearQueryForm(){
         $("#queryForm").form("clear");
@@ -175,5 +174,5 @@
             $("#dangan_grid").datagrid("loadData", data);
         });
     }
-    init();
+    $(danginit)
 </script>

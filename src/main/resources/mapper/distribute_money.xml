@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.help.dao.Distribute_MoneyDao">
+    <select id="findMoney" resultType="com.help.entity.Distribute_Money">
+        select * from distribute_money
+    </select>
+    <!--按行政区划查询资金发放-->
+    <select id="findMoneyByNp" resultType="com.help.entity.Distribute_Money">
+        select * from distribute_money where native_place LIKE #{a}
+    </select>
+    <!--添加任务-->
+    <insert id="addwork" parameterType="com.help.entity.Distribute_Money">
+        insert into distribute_money(money_id,native_place,money_shiDistribute,shi,money_xianDistribute,xian,money_xiangDistribute,xiang,money_personGet,money_Getsum,dissribute_DATE) values(#{money_id},#{native_place},#{money_shiDistribute},#{shi},#{money_xianDistribute},#{xian},#{money_xiangDistribute},#{xiang},#{money_personGet},#{money_Getsum},#{dissribute_DATE})
+    </insert>
+    <!--&lt;!&ndash;修改组织&ndash;&gt;-->
+    <!--<update id="editOrg" parameterType="com.help.entity.Organizations">-->
+        <!--update  organizations set org_name=#{org_name},org_description=#{org_description},org_parentId=#{org_parentId} where orgid =#{orgid}-->
+    <!--</update>-->
+    <!--&lt;!&ndash;删除组织&ndash;&gt;-->
+    <!--<delete id="removeOrg">-->
+        <!--delete from organizations where orgid in-->
+        <!--<foreach collection="list" item="x" open="(" separator="," close=")">-->
+            <!--#{x}-->
+        <!--</foreach>-->
+    <!--</delete>-->
+</mapper>

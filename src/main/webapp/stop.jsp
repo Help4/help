@@ -44,6 +44,7 @@
                 {field: "p_marry", title: "婚姻关系", width: 100},
                 {field: "p_adress", title: "地址", width: 100},
                 {field: "p_workable", title: "劳动能力", width: 100},
+                //{field: "org_name", title: "户籍", width: 100},
                 {field: "sta_name", title: "低保状态", width: 100},
                 {field: "why", title: "意见", width: 100},
             ]],
@@ -58,13 +59,21 @@
                     addStop();
                 }
                 },
+                {
+                    text: "刷新", iconCls: "icon-edit", handler: function () {
+                    reflash();
+                }
+                },
             ]
         });
        query1();
     }
+    function reflash() {
+        query1();
+    }
     function query1() {
        var d= $("#queryForm1").serialize();
-         alert(d);
+        // alert(d);
         $.getJSON("findPersonByName.do",d,function (data) {
            // alert(data);
             //给列表填充数据
@@ -79,7 +88,7 @@
         alert("add1"+x[0].pid);
         if(x.length==1){
             //弹出窗口
-            $("#role_alert").window("open");
+            $("#stop_alert").window("open");
         }else{
             $.messager.alert("系统提示：","请选择一个账户");
         }
@@ -92,8 +101,17 @@
             }
             $("#stop_org").html(op);
         })
+        $.getJSON("findParOrg.do", function (json) {
+          //  alert(json);
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
+            }
+            $("#stop_huji").html(op);
+        })
         $.getJSON("findAllWhy.do", function (json) {
-            alert("why"+json);
+         //   alert("why"+json);
             //把普通string解析为json对象
             var op="";
             for(var i in json){
@@ -104,13 +122,13 @@
         $("#sta_pid").val(x[0].pid);
         $("#sta_org").val(x[0].sta_name);
         $("#sta_why").val(x[0].why);
-        $("#stop_alert").window("open");
+        //$("#stop_alert").window("open");
     }
     function save(){
         var x = $("#stop_grid").datagrid("getSelections");
-        alert("save1"+x[0].sta_name+x[0].pid);
+     //   alert("save1"+x[0].sta_name+x[0].pid);
         var s=$("#stop_form").serialize();
-        alert("sava2"+s);
+      //  alert("sava2"+s);
         $.get("editState.do",s, function (d) {
             //alert(d);
             $("#stop_alert").window("close");

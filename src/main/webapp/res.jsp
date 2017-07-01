@@ -36,7 +36,6 @@
                 {text:"修改",iconCls:"icon-edit",handler:function(){editRes();}},
                 {text:"删除",iconCls:"icon-remove",handler:function(){res_remove();}},
 
-
             ]
         });
         res_load();

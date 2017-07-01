@@ -86,8 +86,16 @@
                     remove();
                 }
                 },
+                {
+                    text: "刷新", iconCls: "icon-edit", handler: function () {
+                    reflash();
+                }
+                },
             ]
         });
+        load(1);
+    }
+    function reflash() {
         load(1);
     }
     var page2=null;

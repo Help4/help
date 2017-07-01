@@ -3,17 +3,10 @@
 <head>
     <title>登录</title>
     <script type="text/javascript">
-        function init() {
-    var msg=$.{msg};
-    alert(msg);
-
-
-        }
-        $(init);
     </script>
 </head>
 <body>
-<div style="display: flex;justify-content: center">
+<div id="form" style="display: flex;justify-content: center">
     <form action="login.do" method="post">
         <label>账号</label>
         <input type="text" name="account"/>
@@ -24,9 +17,5 @@
         <input type="submit" value="登录"/>
     </form>
 </div>
-
-
-
-
 </body>
 </html>

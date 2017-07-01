@@ -43,12 +43,20 @@
                     editqx();
                 }
                 },
+                {
+                    text: "刷新", iconCls: "icon-edit", handler: function () {
+                    reflash();
+                }
+                },
 
             ]
         });
-        load();
+        roload();
     }
-    function load() {
+    function reflash(){
+        roload();
+    }
+    function roload() {
         $.getJSON("findAllRole.do",function (data) {
             //给列表填充数据
             $("#role_grid").datagrid("loadData", data);
@@ -64,20 +72,20 @@
     function save() {
         var y = $("#role_grid").datagrid("getSelected");
         var x=$("#role_form").serialize();
-        alert(x);
+      //  alert(x);
         if(y!=null) {
             $.get("editRole.do", x, function (d) {
                 //alert(d);
                 $("#role_alert").window("close");
                 //重新加载数据
-                load();
+                roload();
             });
         }else {
             $.post("addRole.do",x, function (d) {
-                alert(d)
+              //  alert(d)
                 $("#role_alert").window("close");
                 //重新加载数据
-                load();
+                roload();
             });
         }
     }
@@ -94,7 +102,7 @@
 
     function editRole() {
         var x = $("#role_grid").datagrid("getSelections");
-        alert(x.length);
+       // alert(x.length);
         if(x.length==1){
             $("#role_rid").val(x[0].rid);
             $("#role_account").val(x[0].account);
@@ -107,7 +115,7 @@
     }
     function removeRole() {
         var rows = $("#role_grid").datagrid("getSelections");
-        alert(rows[0].rid);
+        //alert(rows[0].rid);
         //创建一个数组
         var as = [];
         for (var i in rows) {
@@ -122,8 +130,8 @@
             data: d,
             contentType: "application/json",
             success: function (data) {
-                alert(data);
-                load();
+              //  alert(data);
+                roload();
             }
         });
     }
