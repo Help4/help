@@ -7,6 +7,21 @@
        select p.*,s.sta_name ,r.why FROM person p LEFT JOIN person_state ps
       on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid
     </select>
+    <select id="findPersonBySta1"  resultType="com.help.entity.Person">
+        select p.*,s.sta_name ,r.why FROM person p LEFT JOIN person_state ps
+        on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid
+         where s.sta_name="审核通过"
+    </select>
+    <select id="findPersonBySta2"  resultType="com.help.entity.Person">
+        select p.*,s.sta_name ,r.why FROM person p LEFT JOIN person_state ps
+        on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid
+        where s.sta_name="审批通过"
+    </select>
+    <select id="findPersonNull"  resultType="com.help.entity.Person">
+        select p.*,s.sta_name ,r.why FROM person p LEFT JOIN person_state ps
+        on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid
+        where s.sta_name is null
+    </select>
     <select id="findPersonByName"  resultType="com.help.entity.Person">
         select p.*,s.sta_name ,r.why FROM person p LEFT JOIN person_state ps
       on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid

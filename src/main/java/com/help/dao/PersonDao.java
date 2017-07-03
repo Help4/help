@@ -13,6 +13,9 @@ import java.util.List;
 @Repository
 public interface PersonDao {
     public List<Person> findPersonByName(Person person);
+    public List<Person> findPersonNull(Person person);
+    public List<Person> findPersonBySta1(Person person);
+    public List<Person> findPersonBySta2(Person person);
     public List<Person> findPerson(Person person);
     public void addDangan(Person person);
     public void editDangan(Person person);

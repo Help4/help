@@ -12,67 +12,67 @@
         </div>
     </form>
 </div>
-<div id="pub_grid"></div>
-<div id="pub_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
-    <form id="_form" class="form-group" style="margin: 10px">
-        <input id="dangan_id" type="hidden" name="pid" value="0"/>
+<div id="yiban_grid"></div>
+<div id="yiban_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
+    <form id="yiban_form" class="form-group" style="margin: 10px">
+        <input id="yiban_id" type="hidden" name="pid" value="0"/>
         <div class="input-group">
             <span class="input-group-addon">姓名</span>
-            <input id="dangan_name" type="text" name="p_name" class="form-control"/>
+            <input id="yiban_name" type="text" name="p_name" class="form-control"/>
         </div>
         <div class="input-group">
             <span class="input-group-addon">性别</span>
-            <input id="dangan_gender" type="text" name="p_gender" class="form-control"/>
+            <input id="yiban_gender" type="text" name="p_gender" class="form-control"/>
         </div>
         <div class="input-group">
             <span class="input-group-addon">年龄</span>
-            <input id="dangan_age" type="number" name="p_age" class="form-control"/>
+            <input id="yiban_age" type="number" name="p_age" class="form-control"/>
         </div>
 
         <div class="input-group">
             <span class="input-group-addon">民族</span>
-            <input id="dangan_race" type="text" name="p_race" class="form-control"/>
+            <input id="yiban_race" type="text" name="p_race" class="form-control"/>
         </div>
         <div class="input-group">
             <span class="input-group-addon">户口</span>
-            <input id="dangan_hukou" class="form-control" name="p_hukou">
+            <input id="yiban_hukou" class="form-control" name="p_hukou">
             </input>
         </div>
         <div class="input-group">
             <span class="input-group-addon">人口</span>
-            <input id="dangan_peo" class="form-control" name="p_homesum">
+            <input id="yiban_peo" class="form-control" name="p_homesum">
             </input>
         </div>
 
         <div class="input-group">
             <span class="input-group-addon">病因</span>
-            <input id="dangan_reason" class="form-control" name="p_ill">
+            <input id="yiban_reason" class="form-control" name="p_ill">
             </input>
         </div>
         <div class="input-group">
             <span class="input-group-addon">职业</span>
-            <input id="dangan_job" class="form-control" name="p_trade">
+            <input id="yiban_job" class="form-control" name="p_trade">
             </input>
         </div>
 
         <div class="input-group">
             <span class="input-group-addon">电话</span>
-            <input id="dangan_pho" class="form-control" name="p_phone">
+            <input id="yiban_pho" class="form-control" name="p_phone">
             </input>
         </div>
         <div class="input-group">
             <span class="input-group-addon">地址</span>
-            <input id="dangan_address" class="form-control" name="p_adress">
+            <input id="yiban_address" class="form-control" name="p_adress">
             </input>
         </div>
         <div class="input-group">
             <span class="input-group-addon">婚姻关系</span>
-            <input id="dangan_marry" class="form-control" name="p_marry">
+            <input id="yiban_marry" class="form-control" name="p_marry">
             </input>
         </div>
         <div class="input-group">
             <span class="input-group-addon">首次享保</span>
-            <input id="dangan_first" class="form-control" name="p_first">
+            <input id="yiban_first" class="form-control" name="p_first">
             </input>
         </div>
         <div class="input-group">
@@ -81,7 +81,7 @@
         </div>
         <div class="input-group">
             <span class="input-group-addon">劳动能力</span>
-            <input id="dangan_work" class="form-control" name="p_workable">
+            <input id="yiban_work" class="form-control" name="p_workable">
             </input>
         </div>
         <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
@@ -89,8 +89,8 @@
 </div>
 
 <script>
-    function danginit() {
-        $("#dangan_grid").datagrid({
+    function yibaninit() {
+        $("#yiban_grid").datagrid({
             columns: [[
                 {field: "pid", width: 100, checkbox: true},
                 {field: "p_name", title: "姓名", width: 100},
@@ -110,19 +110,19 @@
                 {field: "sta_name", title: "低保状态", width: 100},
             ]],
             toolbar: [
-                {
-                    text: "添加", iconCls: "icon-add", handler: function () {
-                    addDang();
-                }
-                },
+//                {
+//                    text: "添加", iconCls: "icon-add", handler: function () {
+//                    addDaiban();
+//                }
+//                },
                 {
                     text: "修改", iconCls: "icon-edit", handler: function () {
-                    editDang();
+                    editYiban();
                 }
                 },
                 {
                     text: "删除", iconCls: "icon-remove", handler: function () {
-                    removeDang();
+                    removeYiban();
                 }
                 },
                 {
@@ -133,80 +133,80 @@
 
             ]
         });
-        dangload();
+        yibanload();
     }
-    function dangload() {
-        $.getJSON("findPerson.do", function (data) {
+    function yibanload() {
+        $.getJSON("findPersonBySta2.do", function (data) {
             //给列表填充数据
-            $("#dangan_grid").datagrid("loadData", data);
+            $("#yiban_grid").datagrid("loadData", data);
         });
     }
     function reflash(){
-        dangload();
+        yibanload();
     }
     function clearQueryForm(){
         $("#queryForm").form("clear");
     }
-    function addDang(){
-        var x = $("#dangan_grid").datagrid("getSelected");
-        $("#dangan_name").val(x);
-        $("#dangan_gender").val(x);
-        $("#dangan_age").val(x);
-        $("#dangan_race").val(x);
-        $("#dangan_hukou").val(x);
-        $("#dangan_peo").val(x);
-        $("#dangan_reason").val(x);
-        $("#dangan_job").val(x);
-        $("#dangan_pho").val(x);
-        $("#dangan_address").val(x);
-        $("#dangan_marry").val(x);
-        $("#dangan_first").val(x);
-        $("#identify").val(x);
-        $("#dangan_work").val(x);
-        $("#dangan_alert").window("open");
-    }
+//    function addDang(){
+//        var x = $("#dangan_grid").datagrid("getSelected");
+//        $("#dangan_name").val(x);
+//        $("#dangan_gender").val(x);
+//        $("#dangan_age").val(x);
+//        $("#dangan_race").val(x);
+//        $("#dangan_hukou").val(x);
+//        $("#dangan_peo").val(x);
+//        $("#dangan_reason").val(x);
+//        $("#dangan_job").val(x);
+//        $("#dangan_pho").val(x);
+//        $("#dangan_address").val(x);
+//        $("#dangan_marry").val(x);
+//        $("#dangan_first").val(x);
+//        $("#identify").val(x);
+//        $("#dangan_work").val(x);
+//        $("#dangan_alert").window("open");
+//    }
     function save(){
-        var x = $("#dangan_grid").datagrid("getSelected");
-        alert("save1"+x)
-        var y=$("#dangan_form").serialize()
+       // var x = $("#yiban_grid").datagrid("getSelected");
+       // alert("save1"+x)
+        var y=$("#yiban_form").serialize()
         alert("save2"+y)
-        if(x!=null) {
+//        if(x!=null) {
             alert("执行edit")
             $.get("editDangan.do",y, function (d) {
                 alert(d)
-                $("#dangan_alert").window("close");
+                $("#yiban_alert").window("close");
                 //重新加载数据
-                dangload();
+                yibanload();
             });
-        }else {
-            alert("执行add")
-            $.post("addDangan.do",y, function (d) {
-                $("#dangan_alert").window("close");
-                //重新加载数据
-                dangload();
-            });
-        }
+//        }else {
+//            alert("执行add")
+//            $.post("addDangan.do",y, function (d) {
+//                $("#yiban_alert").window("close");
+//                //重新加载数据
+//                yibanload();
+//            });
+//        }
     }
-    function editDang() {
-        var x = $("#dangan_grid").datagrid("getSelections");
+    function editYiban() {
+        var x = $("#yiban_grid").datagrid("getSelections");
         alert(x.length);
         if(x.length==1){
-            $("#dangan_id").val(x[0].pid);
-            $("#dangan_name").val(x[0].p_name);
-            $("#dangan_gender").val(x[0].p_gender);
-            $("#dangan_age").val(x[0].p_age);
-            $("#dangan_race").val(x[0].p_race);
-            $("#dangan_hukou").val(x[0].p_hukou);
-            $("#dangan_peo").val(x[0].p_homesum);
-            $("#dangan_reason").val(x[0].p_ill);
-            $("#dangan_job").val(x[0].p_trade);
-            $("#dangan_pho").val(x[0].p_phone);
-            $("#dangan_address").val(x[0].p_adress);
-            $("#dangan_marry").val(x[0].p_marry);
-            $("#dangan_first").val(x[0].p_first);
+            $("#yiban_id").val(x[0].pid);
+            $("#yiban_name").val(x[0].p_name);
+            $("#yiban_gender").val(x[0].p_gender);
+            $("#yiban_age").val(x[0].p_age);
+            $("#yiban_race").val(x[0].p_race);
+            $("#yiban_hukou").val(x[0].p_hukou);
+            $("#yiban_peo").val(x[0].p_homesum);
+            $("#yiban_reason").val(x[0].p_ill);
+            $("#yiban_job").val(x[0].p_trade);
+            $("#yiban_pho").val(x[0].p_phone);
+            $("#yiban_address").val(x[0].p_adress);
+            $("#yiban_marry").val(x[0].p_marry);
+            $("#yiban_first").val(x[0].p_first);
             $("#identify").val(x[0].identify);
-            $("#dangan_work").val(x[0].p_workable);
-            $("#dangan_alert").window("open");
+            $("#yiban_work").val(x[0].p_workable);
+            $("#yiban_alert").window("open");
 
         }else{
             $.messager.alert("系统提示：","请选择一个账户");
@@ -217,11 +217,11 @@
         var d= $("#queryForm").serialize();
         $.getJSON("findPersonByName.do",d,function (data) {
             //给列表填充数据
-            $("#dangan_grid").datagrid("loadData", data);
+            $("#yiban_grid").datagrid("loadData", data);
         });
     }
     function removeDang(){
-        var rows = $("#dangan_grid").datagrid("getSelections");
+        var rows = $("#yiban_grid").datagrid("getSelections");
         alert(rows[0].pid);
         //创建一个数组
         var as = [];
@@ -237,9 +237,9 @@
             data: d,
             contentType: "application/json",
             success: function (data) {
-                dangload();
+                yibanload();
             }
         });
     }
-    $(danginit)
+    $(yibaninit)
 </script>

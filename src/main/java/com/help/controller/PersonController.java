@@ -23,6 +23,15 @@ public class PersonController {
     public List<Person> findPersonByName(Person person){
         return  ps.findPersonByName(person);
     }
+    @RequestMapping("findPersonNull.do")
+    @ResponseBody
+    public List<Person> findPersonNull(Person person){return ps.findPersonNull(person);};
+    @RequestMapping("findPersonBySta1.do")
+    @ResponseBody
+    public List<Person> findPersonBySta1(Person person){return ps.findPersonBySta1(person);};
+    @RequestMapping("findPersonBySta2.do")
+    @ResponseBody
+    public List<Person> findPersonBySta2(Person person){return ps.findPersonBySta2(person);};
     @RequestMapping("findPerson.do")
     @ResponseBody
     public List<Person> findPerson(Person person){

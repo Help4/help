@@ -16,6 +16,9 @@ import java.util.List;
 public class PersonService {
     @Resource
     private PersonDao ped;
+    public List<Person> findPersonNull(Person person){return ped.findPersonNull(person);};
+    public List<Person> findPersonBySta1(Person person){return ped.findPersonBySta1(person);};
+    public List<Person> findPersonBySta2(Person person){return ped.findPersonBySta2(person);};
     public List<Person> findPersonByName(Person person){
         return  ped.findPersonByName(person);
     }
