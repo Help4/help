@@ -12,4 +12,19 @@
       on p.pid= ps.pid LEFT JOIN state s ON ps.sta_id=s.sta_id LEFT JOIN reason r ON ps.wid=r.wid
       where p_name=#{p_name}
     </select>
+    <insert id="addDangan" parameterType="com.help.entity.Person">
+        insert into person(p_name,p_gender,p_age,identify,p_race,p_hukou,p_homesum,p_first,p_ill,p_trade,p_marry,p_phone,p_adress,p_workable)
+        values(#{p_name},#{p_gender},#{p_age},#{identify},#{p_race},#{p_hukou},#{p_homesum},#{p_first},#{p_ill},#{p_trade},#{p_marry},#{p_phone},#{p_adress},#{p_workable})
+    </insert>
+    <update id="editDangan" parameterType="com.help.entity.Person" >
+        update person set p_name=#{p_name},p_gender=#{p_gender},identify=#{identify},p_race=#{p_race},p_hukou=#{p_hukou},p_homesum=#{p_homesum},
+        p_first=#{p_first},p_ill=#{p_ill},p_trade=#{p_trade},p_marry=#{p_marry},p_phone=#{p_phone},p_adress=#{p_adress},p_workable=#{p_workable}
+        where pid=#{pid}
+    </update>
+    <delete id="removeDanganId">
+        delete from person where pid in
+        <foreach collection="list" item="x" open="(" separator="," close=")">
+            #{x}
+        </foreach>
+    </delete>
 </mapper>

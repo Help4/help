@@ -128,9 +128,9 @@
         var x = $("#stop_grid").datagrid("getSelections");
      //   alert("save1"+x[0].sta_name+x[0].pid);
         var s=$("#stop_form").serialize();
-      //  alert("sava2"+s);
+        alert("sava2"+s);
         $.get("editState.do",s, function (d) {
-            //alert(d);
+            alert(d);
             $("#stop_alert").window("close");
             //重新加载数据
             query1();

@@ -12,9 +12,9 @@
         </div>
     </form>
 </div>
-<div id="dangan_grid"></div>
-<div id="dangan_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
-    <form id="dangan_form" class="form-group" style="margin: 10px">
+<div id="pub_grid"></div>
+<div id="pub_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
+    <form id="_form" class="form-group" style="margin: 10px">
         <input id="dangan_id" type="hidden" name="pid" value="0"/>
         <div class="input-group">
             <span class="input-group-addon">姓名</span>
@@ -148,7 +148,7 @@
         $("#queryForm").form("clear");
     }
     function addDang(){
-       var x = $("#dangan_grid").datagrid("getSelected");
+        var x = $("#dangan_grid").datagrid("getSelected");
         $("#dangan_name").val(x);
         $("#dangan_gender").val(x);
         $("#dangan_age").val(x);
@@ -165,53 +165,53 @@
         $("#dangan_work").val(x);
         $("#dangan_alert").window("open");
     }
-        function save(){
-            var x = $("#dangan_grid").datagrid("getSelected");
-            alert("save1"+x)
-            var y=$("#dangan_form").serialize()
-            alert("save2"+y)
-            if(x!=null) {
-                alert("执行edit")
-                $.get("editDangan.do",y, function (d) {
-                    alert(d)
-                    $("#dangan_alert").window("close");
-                    //重新加载数据
-                    dangload();
-                });
-            }else {
-                alert("执行add")
-                $.post("addDangan.do",y, function (d) {
-                    $("#dangan_alert").window("close");
-                    //重新加载数据
-                    dangload();
-                });
-            }
+    function save(){
+        var x = $("#dangan_grid").datagrid("getSelected");
+        alert("save1"+x)
+        var y=$("#dangan_form").serialize()
+        alert("save2"+y)
+        if(x!=null) {
+            alert("执行edit")
+            $.get("editDangan.do",y, function (d) {
+                alert(d)
+                $("#dangan_alert").window("close");
+                //重新加载数据
+                dangload();
+            });
+        }else {
+            alert("执行add")
+            $.post("addDangan.do",y, function (d) {
+                $("#dangan_alert").window("close");
+                //重新加载数据
+                dangload();
+            });
         }
-        function editDang() {
-            var x = $("#dangan_grid").datagrid("getSelections");
-            alert(x.length);
-            if(x.length==1){
-                $("#dangan_id").val(x[0].pid);
-                $("#dangan_name").val(x[0].p_name);
-                $("#dangan_gender").val(x[0].p_gender);
-                $("#dangan_age").val(x[0].p_age);
-                $("#dangan_race").val(x[0].p_race);
-                $("#dangan_hukou").val(x[0].p_hukou);
-                $("#dangan_peo").val(x[0].p_homesum);
-                $("#dangan_reason").val(x[0].p_ill);
-                $("#dangan_job").val(x[0].p_trade);
-                $("#dangan_pho").val(x[0].p_phone);
-                $("#dangan_address").val(x[0].p_adress);
-                $("#dangan_marry").val(x[0].p_marry);
-                $("#dangan_first").val(x[0].p_first);
-                $("#identify").val(x[0].identify);
-                $("#dangan_work").val(x[0].p_workable);
-                $("#dangan_alert").window("open");
+    }
+    function editDang() {
+        var x = $("#dangan_grid").datagrid("getSelections");
+        alert(x.length);
+        if(x.length==1){
+            $("#dangan_id").val(x[0].pid);
+            $("#dangan_name").val(x[0].p_name);
+            $("#dangan_gender").val(x[0].p_gender);
+            $("#dangan_age").val(x[0].p_age);
+            $("#dangan_race").val(x[0].p_race);
+            $("#dangan_hukou").val(x[0].p_hukou);
+            $("#dangan_peo").val(x[0].p_homesum);
+            $("#dangan_reason").val(x[0].p_ill);
+            $("#dangan_job").val(x[0].p_trade);
+            $("#dangan_pho").val(x[0].p_phone);
+            $("#dangan_address").val(x[0].p_adress);
+            $("#dangan_marry").val(x[0].p_marry);
+            $("#dangan_first").val(x[0].p_first);
+            $("#identify").val(x[0].identify);
+            $("#dangan_work").val(x[0].p_workable);
+            $("#dangan_alert").window("open");
 
-            }else{
-                $.messager.alert("系统提示：","请选择一个账户");
-            }
+        }else{
+            $.messager.alert("系统提示：","请选择一个账户");
         }
+    }
 
     function query() {
         var d= $("#queryForm").serialize();

@@ -12,8 +12,6 @@
   		select u.uid,u.name,u.gender,u.age,u.email,u.phone,r.account,org.org_name from user u
 		LEFT JOIN role r on r.rid=u.account LEFT JOIN
 		organizations org on u.org_name=org.orgid limit #{p},5;
-
-
 	</select>
 	<!-- 删除用户 -->
 	<delete id="removeUserById">
