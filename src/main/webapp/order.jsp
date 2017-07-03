@@ -112,7 +112,7 @@
             toolbar: [
                 {
                     text: "审核", iconCls: "icon-add", handler: function () {
-                    addDaiban();
+                    addOrder();
                 }
                 },
                 {
