@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/6/29 0029.
@@ -26,5 +27,9 @@ public class StopService {
     };
     public void editState(Person_State_Reason psr){
          std.editState(psr);
+    };
+    public void addState(Person_State_Reason psr){
+
+        std.addState(psr);
     };
 }

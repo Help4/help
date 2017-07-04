@@ -12,4 +12,7 @@
     <update id="editState" parameterType="com.help.entity.Person_State_Reason">
        UPDATE person_state ps set ps.sta_id=#{sta_name},ps.wid=#{why} WHERE ps.pid=#{pid}
     </update>
+    <insert id="addState" parameterType="com.help.entity.Person_State_Reason">
+        INSERT into person_state(pid,sta_id,wid)VALUES (#{pid},#{sta_name},#{why})
+    </insert>
 </mapper>

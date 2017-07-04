@@ -15,79 +15,20 @@
 <div id="order_grid"></div>
 <div id="order_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
     <form id="order_form" class="form-group" style="margin: 10px">
-        <input id="order_id" type="hidden" name="pid" value="0"/>
-        <div class="input-group">
-            <span class="input-group-addon">姓名</span>
-            <input id="order_name" type="text" name="p_name" class="form-control"/>
+                <input id="order_id" type="hidden" name="pid" value="0"/>
+                <div class="input-group">
+                    <span class="input-group-addon">状态</span>
+                    <select id="order_org" class="form-control" name="sta_name">
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">原因</span>
+                    <select id="order_why" class="form-control" name="why">
+                    </select>
+                </div>
+                <a class="btn btn-success btn-block" href="javascript:saveOrder()">保存</a>
+            </form>
         </div>
-        <div class="input-group">
-            <span class="input-group-addon">性别</span>
-            <input id="order_gender" type="text" name="p_gender" class="form-control"/>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">年龄</span>
-            <input id="order_age" type="number" name="p_age" class="form-control"/>
-        </div>
-
-        <div class="input-group">
-            <span class="input-group-addon">民族</span>
-            <input id="order_race" type="text" name="p_race" class="form-control"/>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">户口</span>
-            <input id="order_hukou" class="form-control" name="p_hukou">
-            </input>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">人口</span>
-            <input id="order_peo" class="form-control" name="p_homesum">
-            </input>
-        </div>
-
-        <div class="input-group">
-            <span class="input-group-addon">病因</span>
-            <input id="order_reason" class="form-control" name="p_ill">
-            </input>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">职业</span>
-            <input id="order_job" class="form-control" name="p_trade">
-            </input>
-        </div>
-
-        <div class="input-group">
-            <span class="input-group-addon">电话</span>
-            <input id="order_pho" class="form-control" name="p_phone">
-            </input>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">地址</span>
-            <input id="order_address" class="form-control" name="p_adress">
-            </input>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">婚姻关系</span>
-            <input id="order_marry" class="form-control" name="p_marry">
-            </input>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">首次享保</span>
-            <input id="order_first" class="form-control" name="p_first">
-            </input>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">身份证号</span>
-            <input id="identify" type="text" name="identify" class="form-control"/>
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">劳动能力</span>
-            <input id="order_work" class="form-control" name="p_workable">
-            </input>
-        </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
-    </form>
-</div>
-
 <script>
     function orderinit() {
         $("#order_grid").datagrid({
@@ -165,47 +106,67 @@
     //        $("#dangan_work").val(x);
     //        $("#dangan_alert").window("open");
     //    }
-    function save(){
-        // var x = $("#yiban_grid").datagrid("getSelected");
-        // alert("save1"+x)
+    function saveOrder(){
+         var x = $("#order_grid").datagrid("getSelected");
+         alert("save1"+x)
         var y=$("#order_form").serialize()
         alert("save2"+y)
-//        if(x!=null) {
+        if(x!=null) {
         alert("执行edit")
-        $.get("editDangan.do",y, function (d) {
+        $.get("editState.do",y, function (d) {
             alert(d)
             $("#order_alert").window("close");
             //重新加载数据
             orderload();
         });
-//        }else {
-//            alert("执行add")
-//            $.post("addDangan.do",y, function (d) {
-//                $("#yiban_alert").window("close");
-//                //重新加载数据
-//                yibanload();
-//            });
-//        }
+        }else {
+            alert("执行add")
+            $.post("",y, function (d) {
+                $("#yiban_alert").window("close");
+                //重新加载数据
+                yibanload();
+            });
+        }
     }
     function editOrder() {
         var x = $("#order_grid").datagrid("getSelections");
         alert(x.length);
         if(x.length==1){
+            $.getJSON("findAllState.do", function (json) {
+                //alert(json);
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    op+="<option value="+json[i].sta_id+">"+json[i].sta_name+"</option>";
+                }
+                $("#order_org").html(op);
+            })
+            $.getJSON("findAllWhy.do", function (json) {
+                //   alert("why"+json);
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    op+="<option value="+json[i].wid+">"+json[i].why+"</option>";
+                }
+                $("#order_why").html(op);
+            })
             $("#order_id").val(x[0].pid);
-            $("#order_name").val(x[0].p_name);
-            $("#order_gender").val(x[0].p_gender);
-            $("#order_age").val(x[0].p_age);
-            $("#order_race").val(x[0].p_race);
-            $("#order_hukou").val(x[0].p_hukou);
-            $("#order_peo").val(x[0].p_homesum);
-            $("#order_reason").val(x[0].p_ill);
-            $("#order_job").val(x[0].p_trade);
-            $("#order_pho").val(x[0].p_phone);
-            $("#order_address").val(x[0].p_adress);
-            $("#order_marry").val(x[0].p_marry);
-            $("#order_first").val(x[0].p_first);
-            $("#identify").val(x[0].identify);
-            $("#order_work").val(x[0].p_workable);
+//            $("#order_name").val(x[0].p_name);
+//            $("#order_gender").val(x[0].p_gender);
+//            $("#order_age").val(x[0].p_age);
+//            $("#order_race").val(x[0].p_race);
+//            $("#order_hukou").val(x[0].p_hukou);
+//            $("#order_peo").val(x[0].p_homesum);
+//            $("#order_reason").val(x[0].p_ill);
+//            $("#order_job").val(x[0].p_trade);
+//            $("#order_pho").val(x[0].p_phone);
+//            $("#order_address").val(x[0].p_adress);
+//            $("#order_marry").val(x[0].p_marry);
+//            $("#order_first").val(x[0].p_first);
+//            $("#identify").val(x[0].identify);
+//            $("#order_work").val(x[0].p_workable);
+            $("#order_org").val(x[0].sta_name);
+            $("#order_why").val(x[0].why);
             $("#order_alert").window("open");
 
         }else{

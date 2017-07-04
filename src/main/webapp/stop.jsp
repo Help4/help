@@ -87,46 +87,45 @@
         var x = $("#stop_grid").datagrid("getSelections");
         alert("add1"+x[0].pid);
         if(x.length==1){
+            $.getJSON("findAllState.do", function (json) {
+                //alert(json);
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    op+="<option value="+json[i].sta_id+">"+json[i].sta_name+"</option>";
+                }
+                $("#stop_org").html(op);
+            })
+            $.getJSON("findParOrg.do", function (json) {
+                //  alert(json);
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
+                }
+                $("#stop_huji").html(op);
+            })
+            $.getJSON("findAllWhy.do", function (json) {
+                //   alert("why"+json);
+                //把普通string解析为json对象
+                var op="";
+                for(var i in json){
+                    op+="<option value="+json[i].wid+">"+json[i].why+"</option>";
+                }
+                $("#stop_why").html(op);
+            })
+            $("#sta_pid").val(x[0].pid);
+            $("#sta_org").val(x[0].sta_name);
+            $("#sta_why").val(x[0].why);
             //弹出窗口
             $("#stop_alert").window("open");
         }else{
             $.messager.alert("系统提示：","请选择一个账户");
         }
-        $.getJSON("findAllState.do", function (json) {
-            //alert(json);
-            //把普通string解析为json对象
-            var op="";
-            for(var i in json){
-                op+="<option value="+json[i].sta_id+">"+json[i].sta_name+"</option>";
-            }
-            $("#stop_org").html(op);
-        })
-        $.getJSON("findParOrg.do", function (json) {
-          //  alert(json);
-            //把普通string解析为json对象
-            var op="";
-            for(var i in json){
-                op+="<option value="+json[i].orgid+">"+json[i].org_name+"</option>";
-            }
-            $("#stop_huji").html(op);
-        })
-        $.getJSON("findAllWhy.do", function (json) {
-         //   alert("why"+json);
-            //把普通string解析为json对象
-            var op="";
-            for(var i in json){
-                op+="<option value="+json[i].wid+">"+json[i].why+"</option>";
-            }
-            $("#stop_why").html(op);
-        })
-        $("#sta_pid").val(x[0].pid);
-        $("#sta_org").val(x[0].sta_name);
-        $("#sta_why").val(x[0].why);
-        //$("#stop_alert").window("open");
     }
     function save(){
         var x = $("#stop_grid").datagrid("getSelections");
-     //   alert("save1"+x[0].sta_name+x[0].pid);
+        alert("save1"+x[0].sta_name+x[0].pid);
         var s=$("#stop_form").serialize();
         alert("sava2"+s);
         $.get("editState.do",s, function (d) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/6/29 0029.
@@ -36,5 +37,12 @@ public class StopController {
     @ResponseBody
     public void editState(Person_State_Reason psr) {
          sc.editState(psr);
+    }
+
+    @RequestMapping("addState.do")
+    @ResponseBody
+    public int addState(Person_State_Reason psr) {
+        sc.addState(psr);
+        return 1;
     }
 }

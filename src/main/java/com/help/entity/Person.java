@@ -31,6 +31,38 @@ public class Person {
     private int sta_id;
     private int wid;
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "pid=" + pid +
+                ", identify=" + identify +
+                ", p_age=" + p_age +
+                ", p_name='" + p_name + '\'' +
+                ", p_gender='" + p_gender + '\'' +
+                ", p_race='" + p_race + '\'' +
+                ", p_hukou='" + p_hukou + '\'' +
+                ", p_homesum=" + p_homesum +
+                ", p_workable='" + p_workable + '\'' +
+                ", sta_name='" + sta_name + '\'' +
+                ", p_marry='" + p_marry + '\'' +
+                ", p_first='" + p_first + '\'' +
+                ", p_ill='" + p_ill + '\'' +
+                ", p_trade='" + p_trade + '\'' +
+                ", p_phone=" + p_phone +
+                ", p_adress='" + p_adress + '\'' +
+                ", p_monery=" + p_monery +
+                ", p_agree='" + p_agree + '\'' +
+                ", p_towm_monery='" + p_towm_monery + '\'' +
+                ", p_xian_monery='" + p_xian_monery + '\'' +
+                ", p_person_monery='" + p_person_monery + '\'' +
+                ", p_shifaqianren='" + p_shifaqianren + '\'' +
+                ", p_issendmonery='" + p_issendmonery + '\'' +
+                ", why='" + why + '\'' +
+                ", sta_id=" + sta_id +
+                ", wid=" + wid +
+                '}';
+    }
+
     public Person(int pid, int identify, int p_age, String p_name, String p_gender, String p_race, String p_hukou, int p_homesum, String p_workable, String sta_name, String p_marry, String p_first, String p_ill, String p_trade, int p_phone, String p_adress, float p_monery, String p_agree, String p_towm_monery, String p_xian_monery, String p_person_monery, String p_shifaqianren, String p_issendmonery, String why, int sta_id, int wid) {
         this.pid = pid;
         this.identify = identify;

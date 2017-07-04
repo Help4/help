@@ -13,9 +13,9 @@
     </form>
 </div>
 <div id="check_grid"></div>
-<div id="check_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
-    <form id="check_form" class="form-group" style="margin: 10px">
-        <input id="check_id" type="hidden" name="pid" value="0"/>
+<div id="check_alert1" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
+    <form id="check_form1" class="form-group" style="margin: 10px">
+        <input id="check_id1" type="hidden" name="pid" value="0"/>
         <div class="input-group">
             <span class="input-group-addon">姓名</span>
             <input id="check_name" type="text" name="p_name" class="form-control"/>
@@ -84,10 +84,25 @@
             <input id="check_work" class="form-control" name="p_workable">
             </input>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:savePerson()">保存</a>
     </form>
 </div>
-
+<div id="check_alert2" class="easyui-window" data-options="closed:true" style="width:500px;height:600px">
+    <form id="check_form2" class="form-group" style="margin: 10px">
+        <input id="check_id2" type="hidden" name="pid" value="0"/>
+        <div class="input-group">
+            <span class="input-group-addon">状态</span>
+            <select id="check_org" class="form-control" name="sta_name">
+            </select>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">原因</span>
+            <select id="check_why" class="form-control" name="why">
+            </select>
+        </div>
+        <a class="btn btn-success btn-block" href="javascript:savePerson()">保存</a>
+    </form>
+</div>
 <script>
     function checkinit() {
         $("#check_grid").datagrid({
@@ -112,7 +127,7 @@
             toolbar: [
                 {
                     text: "添加", iconCls: "icon-add", handler: function () {
-                    addDaiban();
+                    addPerson();
                 }
                 },
                 {
@@ -122,7 +137,7 @@
                 },
                 {
                     text: "通过", iconCls: "icon-remove", handler: function () {
-                    removecheck();
+                    editPerson();
                 }
                 },
                 {
@@ -147,72 +162,94 @@
     function clearQueryForm(){
         $("#queryForm").form("clear");
     }
-    //    function addDang(){
-    //        var x = $("#dangan_grid").datagrid("getSelected");
-    //        $("#dangan_name").val(x);
-    //        $("#dangan_gender").val(x);
-    //        $("#dangan_age").val(x);
-    //        $("#dangan_race").val(x);
-    //        $("#dangan_hukou").val(x);
-    //        $("#dangan_peo").val(x);
-    //        $("#dangan_reason").val(x);
-    //        $("#dangan_job").val(x);
-    //        $("#dangan_pho").val(x);
-    //        $("#dangan_address").val(x);
-    //        $("#dangan_marry").val(x);
-    //        $("#dangan_first").val(x);
-    //        $("#identify").val(x);
-    //        $("#dangan_work").val(x);
-    //        $("#dangan_alert").window("open");
-    //    }
-    function save(){
-        // var x = $("#yiban_grid").datagrid("getSelected");
-        // alert("save1"+x)
-        var y=$("#check_form").serialize()
-        alert("save2"+y)
-//        if(x!=null) {
-        alert("执行edit")
-        $.get("editDangan.do",y, function (d) {
+        function addPerson(){
+            var x = $("#check_grid").datagrid("getSelected");
+            $("#check_name").val(x);
+            $("#check_gender").val(x);
+            $("#check_age").val(x);
+            $("#check_race").val(x);
+            $("#check_hukou").val(x);
+            $("#check_peo").val(x);
+            $("#check_reason").val(x);
+            $("#check_job").val(x);
+            $("#check_pho").val(x);
+            $("#check_address").val(x);
+            $("#check_marry").val(x);
+            $("#check_first").val(x);
+            $("#identify").val(x);
+            $("#check_work").val(x);
+            $("#check_alert1").window("open");
+        }
+    function savePerson(){
+         var x = $("#check_grid").datagrid("getSelected");
+         alert("save1"+x)
+
+        if(x!=null) {
+            var y=$("#check_form2").serialize()
+            alert("save2"+y)
+             alert("执行edit")
+        $.get("addState.do",y, function (d) {
             alert(d)
-            $("#check_alert").window("close");
+            $("#check_alert2").window("close");
             //重新加载数据
             checkload();
         });
-//        }else {
-//            alert("执行add")
-//            $.post("addDangan.do",y, function (d) {
-//                $("#yiban_alert").window("close");
-//                //重新加载数据
-//                yibanload();
-//            });
-//        }
+        }else {
+            alert("执行add")
+            var y=$("#check_form1").serialize()
+            alert("save2"+y)
+            $.post("addDangan.do",y, function (d) {
+                $("#check_alert1").window("close");
+                //重新加载数据
+                checkload();
+            });
+        }
     }
-//    function editOrder() {
-//        var x = $("#check_grid").datagrid("getSelections");
-//        alert(x.length);
-//        if(x.length==1){
-//            $("#order_id").val(x[0].pid);
-//            $("#order_name").val(x[0].p_name);
-//            $("#order_gender").val(x[0].p_gender);
-//            $("#order_age").val(x[0].p_age);
-//            $("#order_race").val(x[0].p_race);
-//            $("#order_hukou").val(x[0].p_hukou);
-//            $("#order_peo").val(x[0].p_homesum);
-//            $("#order_reason").val(x[0].p_ill);
-//            $("#order_job").val(x[0].p_trade);
-//            $("#order_pho").val(x[0].p_phone);
-//            $("#order_address").val(x[0].p_adress);
-//            $("#order_marry").val(x[0].p_marry);
-//            $("#order_first").val(x[0].p_first);
-//            $("#identify").val(x[0].identify);
-//            $("#order_work").val(x[0].p_workable);
-//            $("#order_alert").window("open");
-//
-//        }else{
-//            $.messager.alert("系统提示：","请选择一个账户");
-//        }
-//    }
-
+    function editPerson() {
+        var x = $("#check_grid").datagrid("getSelections");
+        alert(x.length);
+        if(x.length==1){
+            //弹出窗口
+            $("#check_alert2").window("open");
+        $.getJSON("findAllState.do", function (json) {
+            //alert(json);
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].sta_id+">"+json[i].sta_name+"</option>";
+            }
+            $("#check_org").html(op);
+        })
+        $.getJSON("findAllWhy.do", function (json) {
+            //   alert("why"+json);
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].wid+">"+json[i].why+"</option>";
+            }
+            $("#check_why").html(op);
+        })
+        $("#check_id2").val(x[0].pid);
+//        $("#check_name").val(x[0].p_name);
+//        $("#check_gender").val(x[0].p_gender);
+//        $("#check_age").val(x[0].p_age);
+//        $("#check_race").val(x[0].p_race);
+//        $("#check_hukou").val(x[0].p_hukou);
+//        $("#check_peo").val(x[0].p_homesum);
+//        $("#check_reason").val(x[0].p_ill);
+//        $("#check_job").val(x[0].p_trade);
+//        $("#check_pho").val(x[0].p_phone);
+//        $("#check_address").val(x[0].p_adress);
+//        $("#check_marry").val(x[0].p_marry);
+//        $("#check_first").val(x[0].p_first);
+//        $("#identify").val(x[0].identify);
+//        $("#check_work").val(x[0].p_workable);
+        $("#check_org").val(x[0].sta_name);
+        $("#check_why").val(x[0].why);
+        }else{
+            $.messager.alert("系统提示：","请选择一个账户");
+        }
+    }
     function query() {
         var d= $("#queryForm").serialize();
         $.getJSON("findPersonByName.do",d,function (data) {

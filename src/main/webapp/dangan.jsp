@@ -84,6 +84,16 @@
             <input id="dangan_work" class="form-control" name="p_workable">
             </input>
         </div>
+        <div class="input-group">
+            <span class="input-group-addon">状态</span>
+            <select id="dangan_org" class="form-control" name="sta_name">
+            </select>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">原因</span>
+            <select id="dangan_why" class="form-control" name="why">
+            </select>
+        </div>
         <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
     </form>
 </div>
@@ -108,13 +118,14 @@
                 {field: "p_adress", title: "地址", width: 100},
                 {field: "p_workable", title: "劳动能力", width: 100},
                 {field: "sta_name", title: "低保状态", width: 100},
+                {field: "why", title: "意见", width: 100},
             ]],
             toolbar: [
-                {
-                    text: "添加", iconCls: "icon-add", handler: function () {
-                    addDang();
-                }
-                },
+//                {
+//                    text: "添加", iconCls: "icon-add", handler: function () {
+//                    addDang();
+//                }
+//                },
                 {
                     text: "修改", iconCls: "icon-edit", handler: function () {
                     editDang();
@@ -127,7 +138,7 @@
                 },
                 {
                     text: "刷新", iconCls: "icon-remove", handler: function () {
-                    reflash();
+                    reflashdangan();
                 }
                 }
 
@@ -141,36 +152,56 @@
             $("#dangan_grid").datagrid("loadData", data);
         });
     }
-    function reflash(){
+    function reflashdangan(){
         dangload();
     }
     function clearQueryForm(){
         $("#queryForm").form("clear");
     }
-    function addDang(){
-       var x = $("#dangan_grid").datagrid("getSelected");
-        $("#dangan_name").val(x);
-        $("#dangan_gender").val(x);
-        $("#dangan_age").val(x);
-        $("#dangan_race").val(x);
-        $("#dangan_hukou").val(x);
-        $("#dangan_peo").val(x);
-        $("#dangan_reason").val(x);
-        $("#dangan_job").val(x);
-        $("#dangan_pho").val(x);
-        $("#dangan_address").val(x);
-        $("#dangan_marry").val(x);
-        $("#dangan_first").val(x);
-        $("#identify").val(x);
-        $("#dangan_work").val(x);
-        $("#dangan_alert").window("open");
-    }
+//    function addDang(){
+//       var x = $("#dangan_grid").datagrid("getSelected");
+//        $.getJSON("findAllState.do", function (json) {
+//            //alert(json);
+//            //把普通string解析为json对象
+//            var op="";
+//            for(var i in json){
+//                op+="<option value="+json[i].sta_id+">"+json[i].sta_name+"</option>";
+//            }
+//            $("#dangan_org").html(op);
+//        })
+//        $.getJSON("findAllWhy.do", function (json) {
+//            //   alert("why"+json);
+//            //把普通string解析为json对象
+//            var op="";
+//            for(var i in json){
+//                op+="<option value="+json[i].wid+">"+json[i].why+"</option>";
+//            }
+//            $("#dangan_why").html(op);
+//        })
+//        $("#dangan_name").val(x);
+//        $("#dangan_gender").val(x);
+//        $("#dangan_age").val(x);
+//        $("#dangan_race").val(x);
+//        $("#dangan_hukou").val(x);
+//        $("#dangan_peo").val(x);
+//        $("#dangan_reason").val(x);
+//        $("#dangan_job").val(x);
+//        $("#dangan_pho").val(x);
+//        $("#dangan_address").val(x);
+//        $("#dangan_marry").val(x);
+//        $("#dangan_first").val(x);
+//        $("#identify").val(x);
+//        $("#dangan_work").val(x);
+//        $("#dangan_org").val(x);
+//        $("#dangan_why").val(x);
+//        $("#dangan_alert").window("open");
+//    }
         function save(){
             var x = $("#dangan_grid").datagrid("getSelected");
             alert("save1"+x)
             var y=$("#dangan_form").serialize()
             alert("save2"+y)
-            if(x!=null) {
+          //  if(x!=null) {
                 alert("执行edit")
                 $.get("editDangan.do",y, function (d) {
                     alert(d)
@@ -178,14 +209,14 @@
                     //重新加载数据
                     dangload();
                 });
-            }else {
-                alert("执行add")
-                $.post("addDangan.do",y, function (d) {
-                    $("#dangan_alert").window("close");
-                    //重新加载数据
-                    dangload();
-                });
-            }
+          //  }else {
+          //      alert("执行add")
+           //     $.post("addDangan.do",y, function (d) {
+           //         $("#dangan_alert").window("close");
+          //          //重新加载数据
+         //           dangload();
+           //     });
+          //  }
         }
         function editDang() {
             var x = $("#dangan_grid").datagrid("getSelections");
@@ -206,6 +237,8 @@
                 $("#dangan_first").val(x[0].p_first);
                 $("#identify").val(x[0].identify);
                 $("#dangan_work").val(x[0].p_workable);
+                $("#dangan_org").val(x[0].sta_id);
+                $("#dangan_why").val(x[0].wid);
                 $("#dangan_alert").window("open");
 
             }else{
