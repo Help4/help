@@ -27,12 +27,12 @@
             ]],
             toolbar: [
                 {
-                    text: "审查续期", iconCls: "icon-search", handler: function () {
+                    text: "审核", iconCls: "icon-search", handler: function () {
                     checkDang();
                 }
                 },
                 {
-                    text: "是否通过", iconCls: "icon-ok", handler: function () {
+                    text: "意见", iconCls: "icon-ok", handler: function () {
                     okDang();
                 }
                 },

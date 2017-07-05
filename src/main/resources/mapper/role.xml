@@ -36,4 +36,5 @@
             #{x}
         </foreach>
     </delete>
+
 </mapper>

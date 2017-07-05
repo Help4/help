@@ -101,4 +101,5 @@ public class RoleController {
     public int removeRoleById(@RequestBody ArrayList<Integer> data){
          return rs.removeRoleById(data);
     };
+
 }

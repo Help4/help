@@ -43,4 +43,14 @@
         update  resources set text=#{text},url=#{url},re_pid=#{re_pid}
         where re_id = #{re_id}
     </update>
+    <!-- 分配权限 -->
+    <insert id="fenpei" >
+        insert into role_resources values
+        <foreach collection="list" item="m" separator=",">
+            (#{m.rid},#{m.re_id})
+        </foreach>
+    </insert>
+    <delete id="removeOldRes">
+          delete from role_resources where rid=#{rid}
+    </delete>
 </mapper>

@@ -124,8 +124,6 @@
             $("#re_text").val(x[0].text);
             $("#re_url").val(x[0].url);
             $("#re_pid").val(x[0].re_pid);
-
-
             $.getJSON("findFirstRes.do", function (json) {
                 //把普通string解析为json对象
                 var op="";
