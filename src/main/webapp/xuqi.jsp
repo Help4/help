@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <div id="xuqi_grid"></div>
+<div id="check_grid" ></div>
 <script>
     function init() {
         $("#xuqi_grid").datagrid({
@@ -26,20 +27,16 @@
             ]],
             toolbar: [
                 {
-                    text: "添加", iconCls: "icon-add", handler: function () {
-                    addDang();
+                    text: "审查续期", iconCls: "icon-search", handler: function () {
+                    checkDang();
                 }
                 },
                 {
-                    text: "修改", iconCls: "icon-edit", handler: function () {
-                    editDang();
+                    text: "是否通过", iconCls: "icon-ok", handler: function () {
+                    okDang();
                 }
                 },
-                {
-                    text: "删除", iconCls: "icon-remove", handler: function () {
-                    removeDang();
-                }
-                },
+
                 {
                     text: "刷新", iconCls: "icon-reload", handler: function () {
                     reflash();
@@ -50,7 +47,23 @@
         });
         dangload();
     }
-
+    function  checkDang() {
+        $("#check_grid").datagrid({
+            columns: [[
+                {field: "id", width: 100, checkbox: true},
+                {field: "carid", title: "车牌号", width: 100},
+                {field: "brand", title: "品牌", width: 100},
+                {field: "holder", title: "所有人", width: 100},
+            ]],
+        });
+            checkload();
+    }
+    function checkload() {
+        $.getJSON("check.do", function (data) {
+            //给列表填充数据
+            $("#check_grid").datagrid("loadData", data);
+        });
+    }
     function dangload() {
         $.getJSON("findxuqi.do", function (data) {
             //给列表填充数据

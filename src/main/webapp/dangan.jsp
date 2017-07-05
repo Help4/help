@@ -248,6 +248,9 @@
 
     function query() {
         var d= $("#queryForm").serialize();
+        if (d=null){
+            alert("请输入姓名");
+        }
         $.getJSON("findPersonByName.do",d,function (data) {
             //给列表填充数据
             $("#dangan_grid").datagrid("loadData", data);

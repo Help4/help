@@ -6,4 +6,7 @@
     <select id="showxuqi"  resultType="com.help.entity.Distribute_Money">
         select * from distribute_money where money_Getsum=12
     </select>
+    <select id="showcar"  resultType="com.help.entity.Car">
+        select * from cars
+    </select>
 </mapper>
