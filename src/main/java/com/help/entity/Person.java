@@ -135,6 +135,23 @@ public class Person {
         this.p_marry = p_marry;
     }
 
+    public Person(int identify, int p_age, String p_name, String p_gender, String p_race, String p_hukou, int p_homesum, String p_workable, String p_marry, String p_first, String p_ill, String p_trade, int p_phone, String p_adress) {
+        this.identify = identify;
+        this.p_age = p_age;
+        this.p_name = p_name;
+        this.p_gender = p_gender;
+        this.p_race = p_race;
+        this.p_hukou = p_hukou;
+        this.p_homesum = p_homesum;
+        this.p_workable = p_workable;
+        this.p_marry = p_marry;
+        this.p_first = p_first;
+        this.p_ill = p_ill;
+        this.p_trade = p_trade;
+        this.p_phone = p_phone;
+        this.p_adress = p_adress;
+    }
+
     public Person(int pid, int identify, int p_age, String p_name, String p_gender,
                   String p_race, String p_hukou, int p_homesum, String p_workable,
                   String sta_name, String p_marry, String p_first, String p_ill,
@@ -164,6 +181,7 @@ public class Person {
         this.p_person_monery = p_person_monery;
         this.p_shifaqianren = p_shifaqianren;
         this.p_issendmonery = p_issendmonery;
+
     }
 
     public String getSta_name() {

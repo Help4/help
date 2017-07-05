@@ -7,6 +7,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -44,8 +45,10 @@ public class PersonController {
     @RequestMapping("findPerson.do")
     @ResponseBody
     public List<Person> findPerson(Person person){
-        return  ps.findPerson(person);
+        return ps.findPerson(person);
     }
+
+
     @RequestMapping("addDangan.do")
     @ResponseBody
     public int addDangan(Person person){

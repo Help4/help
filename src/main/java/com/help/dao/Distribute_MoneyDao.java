@@ -15,4 +15,5 @@ public interface Distribute_MoneyDao {
     public void editwork(Distribute_Money distribute_money);
     public void addwork(Distribute_Money distribute_money);
     public int removeMoneyById(List<Integer> data);
+    public List<Distribute_Money> showxuqi();
 }

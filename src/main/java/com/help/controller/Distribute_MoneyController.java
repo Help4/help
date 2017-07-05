@@ -47,4 +47,7 @@ public class Distribute_MoneyController {
     public int removeMoneyById(@RequestBody ArrayList<Integer> data){
         return dms.removeMoneyById(data);
     };
+    @RequestMapping("findxuqi.do")
+    @ResponseBody
+    public List<Distribute_Money> showxuqi(){return dms.showxuqi();}
 }
