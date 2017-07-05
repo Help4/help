@@ -38,26 +38,13 @@
 
             ]
         });
-        res_load(1,10);
+        res_load();
     }
-    function res_load(p,size){
-        $.getJSON("findAllResource.do",{page:p,size:size},function(data){
+    function res_load(){
+        $.getJSON("findAllResource.do",function(data){
             //给列表填充数据
             $("#res_grid").treegrid("loadData",data);
-            var pager= $("#res_grid").treegrid()("getPager");
-            pager.pagination({
-                total:18,//总条数
-                pageNumber:p,//指定当前2是第几页
-                pageSize:size,//默认条数
-                //设置页面尺寸选择数组
-                pageList:[1,2,3,4,5,6,7,8,9,10],
-                onSelectPage:function(page,size){
-                    //根据新页码获取数据
-                    r_page2=page;
-                    r_size2=size;
-                    load(page,size);
-                }
-            });
+
         });
     }
     function res_remove() {
