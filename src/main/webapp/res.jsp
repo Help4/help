@@ -44,7 +44,6 @@
         $.getJSON("findAllResource.do",function(data){
             //给列表填充数据
             $("#res_grid").treegrid("loadData",data);
-
         });
     }
     function res_remove() {
