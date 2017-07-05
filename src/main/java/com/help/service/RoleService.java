@@ -6,6 +6,7 @@ import com.help.entity.Role;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,4 +34,5 @@ public class RoleService {
     public void editRole(Role role){rd.editRole(role);};
     //删除角色
     public int removeRoleById(List<Integer> data){return rd.removeRoleById(data);};
+
 }

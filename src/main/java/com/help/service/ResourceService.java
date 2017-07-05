@@ -1,6 +1,8 @@
 package com.help.service;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -44,5 +46,17 @@ public class ResourceService {
     }
     public void editRes(Resource2 res){
         rd.editRes(res);
+    };
+    //分配权限
+    public int fenpei(ArrayList<Map> data){
+        Map map=data.get(0);
+        Integer i=(Integer)map.get("rid");
+        int s=(int)i;
+        System.out.println( s );
+        //清除老权限
+         rd.removeOldRes(s);
+        //分配新权限
+        int x=rd.fenpei(data);
+        return	x;
     };
 }

@@ -1,6 +1,7 @@
 package com.help.dao;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,4 +22,8 @@ public interface ResourceDao {
     public List<Resource2> findFirstRes();
     //修改资源
     public void editRes(Resource2 res);
+    //分配权限
+    public int fenpei(ArrayList<Map> data);
+    //删除老权限
+    public int removeOldRes(int rid);
 }

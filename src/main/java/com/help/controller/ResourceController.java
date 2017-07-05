@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ResourceController {
@@ -54,6 +55,13 @@ public class ResourceController {
     public void editRes(Resource2 res){
         rService.editRes(res);
     }
+    //分配权限
+    @RequestMapping("fenpei.do")
+    @ResponseBody
+    public int fenpei(@RequestBody ArrayList<Map> data){
+        System.out.println(data.get(0).get("rid"));
+        return rService.fenpei(data);
+    };
 //    @Resource
 //    private ResourceService rService;
 //    //所有节点

@@ -14,6 +14,21 @@
         <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
     </form>
 </div>
+<div id="qx_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:300px">
+    <form id="qx_form" class="form-group" style="margin: 10px">
+        <input id="qx_id" type="hidden" name="re_id" value="0"/>
+        <%--<div class="input-group">--%>
+            <%--<span class="input-group-addon">资源名称</span>--%>
+            <%--<input id="qx_text" type="text" name="text" class="form-control"/>--%>
+        <%--</div>--%>
+        <%--<div class="input-group">--%>
+            <%--<span class="input-group-addon">路径</span>--%>
+            <%--<input id="qx_url" type="text" name="url" class="form-control"/>--%>
+        <%--</div>--%>
+    </form>
+        <table id="qx_grid"></table>
+        <a class="btn btn-success btn-block" href="javascript:qx_save()">保存</a>
+</div>
 <script>
     function roleinit() {
         $("#role_grid").datagrid({
@@ -134,6 +149,51 @@
                 roload();
             }
         });
+    }
+//分配权限
+    function editqx(){
+        $(qx_alert).window("open")
+            $("#qx_grid").treegrid({
+                idField:"re_id",
+                treeField:"text",
+                singleSelect : false,
+                columns:[[
+                    {field:"re_id",width:100,checkbox:true},
+                    {field:"text",title:"名称",width:150},
+                    {field:"url",title:"路径",width:200},
+                    {field:"ptext",title:"父资源",width:100}
+                ]],
+            });
+        $.getJSON("findAllResource.do",function(data){
+            //给列表填充数据
+            alert(data)
+            $("#qx_grid").treegrid("loadData",data);
+        });
+    }
+    function qx_save(){
+        var role=$("#role_grid").datagrid("getSelected");
+        //获取选择的节点
+        alert("rid"+role.rid)
+        var nodes= $("#qx_grid").treegrid("getSelections");
+        alert("reid"+nodes[0].re_id)
+        var as=[];
+        for(var x in nodes){
+            var o={rid:role.rid,re_id:nodes[x].re_id};
+            as[x]=o;
+           // alert("o"+o)
+        }
+        var json=JSON.stringify(as);
+        //提交
+        $.ajax({
+            url:"fenpei.do",
+            method:"post",
+            data:json,
+            contentType:"application/json",
+            success:function(d){
+                alert(d);
+            }
+        });
+        $(qx_alert).window("close")
     }
     $(roleinit);
 </script>
