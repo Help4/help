@@ -93,29 +93,38 @@
                 },
             ]
         });
-        load(1);
+        load(1,3);
     }
     function reflash() {
-        load(1);
+        load(1,3);
+    }
+    var u_len=0;
+    function load2() {
+        $.getJSON("findAllUser2.do",function(data){
+            u_len=data.length;
+        })
     }
     var page2=null;
-    function load(p) {
-        $.getJSON("findAllUser.do",{page:p}, function (data) {
+    var size2=null;
+    function load(p,size) {
+        $.getJSON("findAllUser.do",{page:p,size:size}, function (data) {
             //给列表填充数据
             $("#user_grid").datagrid("loadData", data);
             //获取列表的分页组件
+
             var pager= $("#user_grid").datagrid("getPager");
             //设置分页组件的参数
             pager.pagination({
-                total:5,//总条数
-                pageNumber:page2,//指定当前2是第几页
-                pageSize:2,//默认条数
+                total:u_len,//总条数
+                pageNumber:p,//指定当前2是第几页
+                pageSize:size,//默认条数
                 //设置页面尺寸选择数组
                 pageList:[1,2,3,4,5,6,7,8,9,10],
                 onSelectPage:function(page,size){
                     //根据新页码获取数据
                     page2=page;
-                    load(page);
+                    size2=size;
+                    load(page,size);
                 }
             });
         });
@@ -156,13 +165,13 @@
                 $.get("editUser.do", x, function (d) {
                     $("#user_alert").window("close");
                     //重新加载数据
-                    load(page2);
+                    load(page2,size2);
                 });
             }else {
             $.post("addUser.do",x, function (d) {
                 $("#user_alert").window("close");
                 //重新加载数据
-                load(page2);
+                load(page2,size2);
             });
             }
     }
@@ -185,7 +194,7 @@
             contentType: "application/json",
             success: function (data) {
 
-                load(page2);
+                load(page2,size2);
             }
         });
     }
@@ -243,5 +252,6 @@
             $.messager.alert("系统提示：","请选择一个账户");
         }
     }
+    $(load2);
     $(userinit);
 </script>

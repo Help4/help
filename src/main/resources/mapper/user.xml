@@ -7,11 +7,19 @@
 	<select id="selectAllPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
 	select top 2* from user  where not in (select top 30表名 from 主键);&#45;&#45;查询显示31-40条记录（10条）
 	</select>-->
-
+	<select id="findAllUser2" resultType="com.help.entity.User">
+		select u.uid,u.name,u.gender,u.age,u.email,u.phone,r.account,org.org_name from user u
+		LEFT JOIN role r on r.rid=u.account LEFT JOIN
+		organizations org on u.org_name=org.orgid
+	</select>
 	<select id="findAllUser" resultType="com.help.entity.User">
   		select u.uid,u.name,u.gender,u.age,u.email,u.phone,r.account,org.org_name from user u
 		LEFT JOIN role r on r.rid=u.account LEFT JOIN
-		organizations org on u.org_name=org.orgid limit #{p},5;
+		organizations org on u.org_name=org.orgid limit
+		<foreach collection="list" item="y" open="" separator="," close="">
+			#{y}
+		</foreach>
+
 	</select>
 	<!-- 删除用户 -->
 	<delete id="removeUserById">

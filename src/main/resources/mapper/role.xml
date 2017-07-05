@@ -11,11 +11,11 @@
     </select>
     <!-- 根据userid查找持有的资源模块 -->
     <select id="findReByRole" resultType="com.help.entity.Resource2">
-        select * from resources re where re.re_pid=0 and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.r_id=ro.rid where ro.rid=#{rid})
+        select * from resources re where re.re_pid=0 and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.rid=ro.rid where ro.rid=#{rid})
     </select>
     <!-- 根据uid,pid 查找持有的资源模块 -->
     <select id="findSubByPid" resultType="com.help.entity.Resource2" parameterType="map">
-    select * from resources re where re.re_pid=#{pid} and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.r_id=ro.rid where ro.rid=#{rid})
+    select * from resources re where re.re_pid=#{pid} and re.re_id in (select rr.re_id from role_resources rr left join role ro on rr.rid=ro.rid where ro.rid=#{rid})
   </select>
     <!-- 查找所有的角色 -->
     <select id="findAllRole" resultType="com.help.entity.Role">

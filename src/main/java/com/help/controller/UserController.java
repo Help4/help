@@ -27,11 +27,22 @@ public class UserController {
     @RequestMapping(value = "findAllUser")
     public void findAllUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
     String page = req.getParameter("page");
-
-    List<User> rs = us.findAllUser(page);
+        String size = req.getParameter("size");
+        int p=Integer.parseInt(page);
+        int s=Integer.parseInt(size);
+        int p2=(p-1)*s;
+        List<Integer> data=new ArrayList<Integer>();
+        data.add(p2);
+        data.add(s);
+        List<User> rs = us.findAllUser(data);
     String json = JSON.toJSONString(rs);
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().print(json);
+    }
+    @RequestMapping("findAllUser2.do")
+    @ResponseBody
+    public List<User> findAllUser2(){
+        return us.findAllUser2();
     }
     //删除用户
     @RequestMapping("removeUserById.do")
