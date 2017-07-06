@@ -7,7 +7,7 @@
         <label for="name">搜索档案:</label>
         <input id="name" type="text" name="p_name"placeholder="请输入姓名"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="query();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="queryOrder();" iconCls="icon-search">确定</a>
             <a href="#" class="easyui-linkbutton" onclick="clearQueryForm();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
@@ -68,7 +68,7 @@
                 },
                 {
                     text: "刷新", iconCls: "icon-remove", handler: function () {
-                    reflash();
+                    reflashOrder();
                 }
                 }
 
@@ -82,7 +82,7 @@
             $("#order_grid").datagrid("loadData", data);
         });
     }
-    function reflash(){
+    function reflashOrder(){
         orderload();
     }
     function clearQueryForm(){
@@ -174,8 +174,8 @@
         }
     }
 
-    function query() {
-        var d= $("#queryForm").serialize();
+    function queryOrder() {
+        var d= $("#queryFormOrder").serialize();
         $.getJSON("findPersonByName.do",d,function (data) {
             //给列表填充数据
             $("#order_grid").datagrid("loadData", data);

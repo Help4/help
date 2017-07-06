@@ -3,12 +3,12 @@
 <div id="panel" class="easyui-panel" title="查询条件"
            icon="icon-query-form" collapsible="true"
            style="padding: 10px;">
-    <form id="queryForm2" method="post">
+    <form id="queryFormfa" method="post">
         <label for="name">行政区域:</label>
         <input id="name" type="text" name="native_place"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="query2();" iconCls="icon-search">确定</a>
-            <a href="#" class="easyui-linkbutton" onclick="clearQueryForm2();" iconCls="icon-cancel">取消</a>
+            <a href="#" class="easyui-linkbutton" onclick="queryfa();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="clearQueryFormfa();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
 </div>
@@ -63,7 +63,7 @@
             <input id="fa_dissribute_DATE" type="date" class="form-control" name="dissribute_DATE">
             </input>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveFa()">保存</a>
     </form>
 </div>
 </div>
@@ -106,7 +106,7 @@
 //                },
                 {
                     text: "刷新", iconCls: "icon-edit", handler: function () {
-                    reflash();
+                    reflashwork();
                 }
                 },
 //                {
@@ -116,20 +116,20 @@
 //                },
             ]
         });
-        load();
+        loadfa();
     }
-    function load() {
+    function loadfa() {
         $.getJSON("findMoney.do",function (data) {
             alert(data);
             //给列表填充数据
             $("#fa_grid").datagrid("loadData", data);
         });
     }
-    function reflash() {
-        load();
+    function reflashfa() {
+        loadfa();
     }
-    function query2() {
-        var d= $("#queryForm2").serialize();
+    function queryfa() {
+        var d= $("#queryFormfa").serialize();
         //alert(d);
         $.getJSON("findMoneyByNp.do",d,function (data) {
              alert(data);
@@ -137,8 +137,8 @@
             $("#fa_grid").datagrid("loadData", data);
         });
     }
-    function clearQueryForm2(){
-        $("#queryForm2").form("clear");
+    function clearQueryFormfa(){
+        $("#queryFormfa").form("clear");
     }
     function addwork(){
         var x = $("#fa_grid").datagrid("getSelected");
@@ -155,7 +155,7 @@
         $("#fa_dissribute_DATE").val(x);
         $("#fa_alert").window("open");
     }
-    function save(){
+    function saveFa(){
         var y = $("#fa_grid").datagrid("getSelected");
         var x=$("#fa_form").serialize();
         alert("y"+y);
@@ -166,14 +166,14 @@
                 alert("22");
                 $("#fa_alert").window("close");
                 //重新加载数据
-                query2();
+                queryfa();
             });
         }else{
             $.post("addwork.do",x, function (d) {
                 alert("33");
                 $("#fa_alert").window("close");
                 //重新加载数据
-                query2();
+                queryfa();
             });
         }
     }
@@ -214,7 +214,7 @@
             data: d,
             contentType: "application/json",
             success: function (data) {
-                load();
+                loadfa();
             }
         });
     }

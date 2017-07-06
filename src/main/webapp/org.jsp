@@ -16,7 +16,7 @@
             <select id="parent" class="form-control" name="org_parentId">
             </select>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveOrg()">保存</a>
     </form>
 </div>
 <script type="text/javascript">
@@ -37,14 +37,14 @@
                 {text:"删除",iconCls:"icon-remove",handler:function(){removeOrg();}},
                 {
                     text: "刷新", iconCls: "icon-edit", handler: function () {
-                    reflash();
+                    reflashOrg();
                 }
                 },
             ]
         });
         orgload();
     }
-    function reflash(){
+    function reflashOrg(){
         orgload();
     }
     function orgload(){
@@ -64,7 +64,7 @@
         })
         $("#org_alert").window("open");
     }
-    function save() {
+    function saveOrg() {
         var x=$("#org_form").serialize()
         var y= $("#org_grid").treegrid("getSelected");
        // alert(x);

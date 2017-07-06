@@ -3,11 +3,11 @@
 <div id="panel" class="easyui-panel" title="查询条件"
      icon="icon-query-form" collapsible="true"
      style="padding: 10px;">
-    <form id="queryForm1" method="post">
+    <form id="queryFormstop" method="post">
         <label for="name">姓名:</label>
         <input id="name" type="text" name="p_name"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="query1();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="querystop();" iconCls="icon-search">确定</a>
             <a href="#" class="easyui-linkbutton" onclick="clearQueryForm1();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
@@ -26,7 +26,7 @@
             <select id="stop_why" class="form-control" name="why">
             </select>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveStop()">保存</a>
     </form>
 </div>
 </div>
@@ -61,18 +61,18 @@
                 },
                 {
                     text: "刷新", iconCls: "icon-edit", handler: function () {
-                    reflash();
+                    reflashstop();
                 }
                 },
             ]
         });
-       query1();
+       querystop();
     }
-    function reflash() {
-        query1();
+    function reflashstop() {
+        querystop();
     }
-    function query1() {
-       var d= $("#queryForm1").serialize();
+    function querystop() {
+       var d= $("#queryFormstop").serialize();
         // alert(d);
         $.getJSON("findPersonByName.do",d,function (data) {
            // alert(data);
@@ -123,7 +123,7 @@
             $.messager.alert("系统提示：","请选择一个账户");
         }
     }
-    function save(){
+    function saveStop(){
         var x = $("#stop_grid").datagrid("getSelections");
         alert("save1"+x[0].sta_name+x[0].pid);
         var s=$("#stop_form").serialize();
@@ -132,7 +132,7 @@
             alert(d);
             $("#stop_alert").window("close");
             //重新加载数据
-            query1();
+            querystop();
         });
     }
     $(stopinit);

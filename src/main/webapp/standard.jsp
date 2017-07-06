@@ -12,7 +12,7 @@
             <span class="input-group-addon">百分比</span>
             <input id="st_percent" type="text" name="gender" class="form-control"/>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveSt()">保存</a>
     </form>
 </div>
 </div>
@@ -31,9 +31,9 @@
 
             ]
         });
-        load();
+        loadst();
     }
-    function load(){
+    function loadst(){
         $.getJSON("findSt.do",function(data){
             alert(data)
             //给列表填充数据
@@ -44,7 +44,7 @@
         //弹出窗口
         $("#sta_alert").window("open");
     }
-    function save(){
+    function saveSt(){
         var x=$("#sta_form").serialize();
         //  alert(x);
         $.get("addUser.do",x,function(d){
@@ -55,7 +55,7 @@
 
     }
 
-    function remove(){
+    function removeSt(){
         var rows= $("#sta_grid").datagrid("getSelections");
         alert(rows[0].uid);
         //创建一个数组
@@ -73,7 +73,7 @@
             contentType:"application/json",
             success:function(data){
                 alert(data);
-                load();
+                loadst();
             }
         });
     }

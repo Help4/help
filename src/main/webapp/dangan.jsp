@@ -3,12 +3,12 @@
 <div id="panel" class="easyui-panel" title="查询条件"
      icon="icon-query-form" collapsible="true"
      style="padding: 10px;">
-    <form id="queryForm" method="post">
+    <form id="queryFormDangan" method="post">
         <label for="name">搜索档案:</label>
         <input id="name" type="text" name="p_name"placeholder="请输入姓名"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="query();" iconCls="icon-search">确定</a>
-            <a href="#" class="easyui-linkbutton" onclick="clearQueryForm();" iconCls="icon-cancel">取消</a>
+            <a href="#" class="easyui-linkbutton" onclick="queryDangan();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="clearQueryFormDangan();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
 </div>
@@ -94,7 +94,7 @@
             <select id="dangan_why" class="form-control" name="why">
             </select>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveDangan()">保存</a>
     </form>
 </div>
 
@@ -155,8 +155,8 @@
     function reflashdangan(){
         dangload();
     }
-    function clearQueryForm(){
-        $("#queryForm").form("clear");
+    function clearQueryFormDangan(){
+        $("#queryFormDangan").form("clear");
     }
 //    function addDang(){
 //       var x = $("#dangan_grid").datagrid("getSelected");
@@ -196,9 +196,10 @@
 //        $("#dangan_why").val(x);
 //        $("#dangan_alert").window("open");
 //    }
-        function save(){
+        function saveDangan(){
             var x = $("#dangan_grid").datagrid("getSelected");
             alert("save1"+x)
+
             var y=$("#dangan_form").serialize()
             alert("save2"+y)
           //  if(x!=null) {
@@ -221,6 +222,24 @@
         function editDang() {
             var x = $("#dangan_grid").datagrid("getSelections");
             alert(x.length);
+            $.getJSON("findAllState.do", function (json) {
+            //alert(json);
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].sta_id+">"+json[i].sta_name+"</option>";
+            }
+            $("#dangan_org").html(op);
+        })
+        $.getJSON("findAllWhy.do", function (json) {
+            //   alert("why"+json);
+            //把普通string解析为json对象
+            var op="";
+            for(var i in json){
+                op+="<option value="+json[i].wid+">"+json[i].why+"</option>";
+            }
+            $("#dangan_why").html(op);
+        })
             if(x.length==1){
                 $("#dangan_id").val(x[0].pid);
                 $("#dangan_name").val(x[0].p_name);
@@ -237,8 +256,8 @@
                 $("#dangan_first").val(x[0].p_first);
                 $("#identify").val(x[0].identify);
                 $("#dangan_work").val(x[0].p_workable);
-                $("#dangan_org").val(x[0].sta_id);
-                $("#dangan_why").val(x[0].wid);
+                $("#dangan_org").val(x[0].sta_name);
+                $("#dangan_why").val(x[0].why);
                 $("#dangan_alert").window("open");
 
             }else{
@@ -246,8 +265,8 @@
             }
         }
 
-    function query() {
-        var d= $("#queryForm").serialize();
+    function queryDangan() {
+        var d= $("#queryFormDangan").serialize();
         if (d=null){
             alert("请输入姓名");
         }

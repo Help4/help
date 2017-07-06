@@ -3,7 +3,7 @@
 <div id="panel" class="easyui-panel" title="查询条件"
      icon="icon-query-form" collapsible="true"
      style="padding: 10px;">
-    <form id="queryForm" method="post">
+    <form id="queryFormuser" method="post">
         <label for="id">登录ID:</label>
         <input id="id" type="text" name="id"></input>
         <label for="name">姓名:</label>
@@ -13,7 +13,7 @@
         <label for="phone">电话 :</label>
         <input id="phone" type="text" name="phone"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="queryVO();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="queryUser();" iconCls="icon-search">确定</a>
             <a href="#" class="easyui-linkbutton" onclick="clearQueryForm();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
@@ -52,7 +52,7 @@
             <select id="user_org" class="form-control" name="org_name">
             </select>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveUser()">保存</a>
     </form>
 </div>
 </div>
@@ -78,25 +78,25 @@
                 },
                 {
                     text: "修改", iconCls: "icon-edit", handler: function () {
-                    edit();
+                    editUser();
                 }
                 },
                 {
                     text: "删除", iconCls: "icon-remove", handler: function () {
-                    remove();
+                    removeUser();
                 }
                 },
                 {
                     text: "刷新", iconCls: "icon-edit", handler: function () {
-                    reflash();
+                    reflashUser();
                 }
                 },
             ]
         });
-        load(1,3);
+        loadUser(1,3);
     }
-    function reflash() {
-        load(1,3);
+    function reflashUser() {
+        loadUser(1,3);
     }
     var u_len=0;
     function load2() {
@@ -106,7 +106,7 @@
     }
     var page2=null;
     var size2=null;
-    function load(p,size) {
+    function loadUser(p,size) {
         $.getJSON("findAllUser.do",{page:p,size:size}, function (data) {
             //给列表填充数据
             $("#user_grid").datagrid("loadData", data);
@@ -124,7 +124,7 @@
                     //根据新页码获取数据
                     page2=page;
                     size2=size;
-                    load(page,size);
+                    loadUser(page,size);
                 }
             });
         });
@@ -158,25 +158,25 @@
         $("#user_phone").val(x);
         $("#user_alert").window("open");
     }
-    function save() {
+    function saveUser() {
         var y = $("#user_grid").datagrid("getSelected");
         var x = $("#user_form").serialize();
             if(y!=null) {
                 $.get("editUser.do", x, function (d) {
                     $("#user_alert").window("close");
                     //重新加载数据
-                    load(page2,size2);
+                    loadUser(page2,size2);
                 });
             }else {
             $.post("addUser.do",x, function (d) {
                 $("#user_alert").window("close");
                 //重新加载数据
-                load(page2,size2);
+                loadUser(page2,size2);
             });
             }
     }
 
-    function remove() {
+    function removeUser() {
         var rows = $("#user_grid").datagrid("getSelections");
         alert(rows[0].uid);
         //创建一个数组
@@ -194,7 +194,7 @@
             contentType: "application/json",
             success: function (data) {
 
-                load(page2,size2);
+                loadUser(page2,size2);
             }
         });
     }
@@ -210,7 +210,7 @@
         }
     }
 
-    function edit() {
+    function editUser() {
         var x = $("#user_grid").datagrid("getSelections");
         //alert(x.length);
         if(x.length==1){

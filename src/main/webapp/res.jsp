@@ -16,7 +16,7 @@
             <select id="re_pid" class="form-control" name="re_pid">
             </select>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:res_save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveRes()">保存</a>
     </form>
 </div>
 <script type="text/javascript">
@@ -34,19 +34,33 @@
             toolbar:[
                 {text:"添加",iconCls:"icon-add",handler:function(){addRes();}},
                 {text:"修改",iconCls:"icon-edit",handler:function(){editRes();}},
-                {text:"删除",iconCls:"icon-remove",handler:function(){res_remove();}},
+                {text:"删除",iconCls:"icon-remove",handler:function(){removeRes();}},
 
             ]
         });
-        res_load();
+        res_load(1,10);
     }
-    function res_load(){
-        $.getJSON("findAllResource.do",function(data){
+    function res_load(p,size){
+        $.getJSON("findAllResource.do",{page:p,size:size},function(data){
             //给列表填充数据
             $("#res_grid").treegrid("loadData",data);
+            var pager= $("#res_grid").treegrid("getPager");
+            pager.pagination({
+                total:18,//总条数
+                pageNumber:p,//指定当前2是第几页
+                pageSize:size,//默认条数
+                //设置页面尺寸选择数组
+                pageList:[1,2,3,4,5,6,7,8,9,10],
+                onSelectPage:function(page,size){
+                    //根据新页码获取数据
+                    r_page2=page;
+                    r_size2=size;
+                    load(page,size);
+                }
+            });
         });
     }
-    function res_remove() {
+    function removeRes() {
         var rows = $("#res_grid").treegrid("getSelections");
 
         //创建一个数组
@@ -80,10 +94,9 @@
         //弹出窗口
         $("#res_alert").window("open");
     }
-    function res_save() {
+    function saveRes() {
         var x = $("#res_form").serialize();
         var y= $("#res_grid").treegrid("getSelected");
-
 
         if(y!=null){
 

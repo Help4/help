@@ -11,7 +11,7 @@
             <span class="input-group-addon">密码</span>
             <input id="role_pwd" type="text" name="pwd" class="form-control"/>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveRole()">保存</a>
     </form>
 </div>
 <div id="qx_alert" class="easyui-window" data-options="closed:true" style="width:500px;height:300px">
@@ -55,12 +55,12 @@
                 },
                 {
                     text: "分配权限", iconCls: "icon-edit", handler: function () {
-                    editqx();
+                    editQx();
                 }
                 },
                 {
                     text: "刷新", iconCls: "icon-edit", handler: function () {
-                    reflash();
+                    reflashRole();
                 }
                 },
 
@@ -68,7 +68,7 @@
         });
         roload();
     }
-    function reflash(){
+    function reflashRole(){
         roload();
     }
     function roload() {
@@ -84,7 +84,7 @@
         $("#role_pwd").val(x);
         $("#role_alert").window("open");
     }
-    function save() {
+    function saveRole() {
         var y = $("#role_grid").datagrid("getSelected");
         var x=$("#role_form").serialize();
       //  alert(x);
@@ -151,7 +151,7 @@
         });
     }
 //分配权限
-    function editqx(){
+    function editQx(){
         $(qx_alert).window("open")
             $("#qx_grid").treegrid({
                 idField:"re_id",

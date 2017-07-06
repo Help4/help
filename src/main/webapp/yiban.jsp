@@ -3,11 +3,11 @@
 <div id="panel" class="easyui-panel" title="查询条件"
      icon="icon-query-form" collapsible="true"
      style="padding: 10px;">
-    <form id="queryForm" method="post">
+    <form id="queryFormyiban" method="post">
         <label for="name">搜索档案:</label>
         <input id="name" type="text" name="p_name"placeholder="请输入姓名"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="query();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="queryYiban();" iconCls="icon-search">确定</a>
             <a href="#" class="easyui-linkbutton" onclick="clearQueryForm();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
@@ -84,7 +84,7 @@
             <input id="yiban_work" class="form-control" name="p_workable">
             </input>
         </div>
-        <a class="btn btn-success btn-block" href="javascript:save()">保存</a>
+        <a class="btn btn-success btn-block" href="javascript:saveYiban()">保存</a>
     </form>
 </div>
 
@@ -127,7 +127,7 @@
                 },
                 {
                     text: "刷新", iconCls: "icon-remove", handler: function () {
-                    reflash();
+                    reflashYiban();
                 }
                 }
 
@@ -141,36 +141,18 @@
             $("#yiban_grid").datagrid("loadData", data);
         });
     }
-    function reflash(){
+    function reflashYiban(){
         yibanload();
     }
     function clearQueryForm(){
         $("#queryForm").form("clear");
     }
-//    function addDang(){
-//        var x = $("#dangan_grid").datagrid("getSelected");
-//        $("#dangan_name").val(x);
-//        $("#dangan_gender").val(x);
-//        $("#dangan_age").val(x);
-//        $("#dangan_race").val(x);
-//        $("#dangan_hukou").val(x);
-//        $("#dangan_peo").val(x);
-//        $("#dangan_reason").val(x);
-//        $("#dangan_job").val(x);
-//        $("#dangan_pho").val(x);
-//        $("#dangan_address").val(x);
-//        $("#dangan_marry").val(x);
-//        $("#dangan_first").val(x);
-//        $("#identify").val(x);
-//        $("#dangan_work").val(x);
-//        $("#dangan_alert").window("open");
-//    }
-    function save(){
+//
+    function saveYiban(){
        // var x = $("#yiban_grid").datagrid("getSelected");
        // alert("save1"+x)
         var y=$("#yiban_form").serialize()
         alert("save2"+y)
-//        if(x!=null) {
             alert("执行edit")
             $.get("editDangan.do",y, function (d) {
                 alert(d)
@@ -213,14 +195,14 @@
         }
     }
 
-    function query() {
-        var d= $("#queryForm").serialize();
+    function queryYiban() {
+        var d= $("#queryFormyiban").serialize();
         $.getJSON("findPersonByName.do",d,function (data) {
             //给列表填充数据
             $("#yiban_grid").datagrid("loadData", data);
         });
     }
-    function removeDang(){
+    function removeYiban(){
         var rows = $("#yiban_grid").datagrid("getSelections");
         alert(rows[0].pid);
         //创建一个数组

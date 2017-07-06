@@ -9,7 +9,7 @@
 <div id="xuqi_grid"></div>
 <div id="check_grid" ></div>
 <script>
-    function init() {
+    function xuqiinit() {
         $("#xuqi_grid").datagrid({
             columns: [[
                 {field: "money_id", width: 100, checkbox: true},
@@ -28,26 +28,26 @@
             toolbar: [
                 {
                     text: "审核", iconCls: "icon-search", handler: function () {
-                    checkDang();
+                    checkxuqi();
                 }
                 },
                 {
                     text: "意见", iconCls: "icon-ok", handler: function () {
-                    okDang();
+                    okxuqi();
                 }
                 },
 
                 {
                     text: "刷新", iconCls: "icon-reload", handler: function () {
-                    reflash();
+                    reflashxuqi();
                 }
                 }
 
             ]
         });
-        dangload();
+        xuqiload();
     }
-    function  checkDang() {
+    function  checkxuqi() {
         $("#check_grid").datagrid({
             columns: [[
                 {field: "id", width: 100, checkbox: true},
@@ -56,20 +56,20 @@
                 {field: "holder", title: "所有人", width: 100},
             ]],
         });
-            checkload();
+            checkloadxuqi();
     }
-    function checkload() {
+    function checkloadxuqi() {
         $.getJSON("check.do", function (data) {
             //给列表填充数据
             $("#check_grid").datagrid("loadData", data);
         });
     }
-    function dangload() {
+    function xuqiload() {
         $.getJSON("findxuqi.do", function (data) {
             //给列表填充数据
             $("#xuqi_grid").datagrid("loadData", data);
         });
     }
 
-    $(init)
+    $(xuqiinit)
 </script>

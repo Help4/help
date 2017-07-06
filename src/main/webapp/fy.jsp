@@ -8,7 +8,7 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/easyui.js"></script>
     <script type="text/javascript">
-        function init(){
+        function fyinit(){
             $("#user_grid").datagrid({
                 title:"用户信息",
 
@@ -18,11 +18,11 @@
                     {field:"pwd",title:"密码",width:100}
                 ]]
             });
-            load(1);
+            fyload(1);
         }
-        $(init);
+        $(fyinit);
         //加载数据
-        function load(p){
+        function fyload(p){
             //异步获取json对象
             $.getJSON("fy.do",{page:p},function(data){
                 $("#user_grid").datagrid("loadData",data);
@@ -37,7 +37,7 @@
                     pageList:[1,2,3,4,5,6,7,8,9,10,],
                     onSelectPage:function(page,size){
                         //根据新页码获取数据
-                        load(page);
+                        fyload(page);
                     }
                 });
             });

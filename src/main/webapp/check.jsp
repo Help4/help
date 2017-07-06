@@ -3,12 +3,12 @@
 <div id="panel" class="easyui-panel" title="查询条件"
      icon="icon-query-form" collapsible="true"
      style="padding: 10px;">
-    <form id="queryForm" method="post">
+    <form id="queryFormCheck" method="post">
         <label for="name">搜索档案:</label>
         <input id="name" type="text" name="p_name"placeholder="请输入姓名"></input>
         <div style="padding: 10px;">
-            <a href="#" class="easyui-linkbutton" onclick="query();" iconCls="icon-search">确定</a>
-            <a href="#" class="easyui-linkbutton" onclick="clearQueryForm();" iconCls="icon-cancel">取消</a>
+            <a href="#" class="easyui-linkbutton" onclick="queryCheck();" iconCls="icon-search">确定</a>
+            <a href="#" class="easyui-linkbutton" onclick="clearQueryFormCheck();" iconCls="icon-cancel">取消</a>
         </div>
     </form>
 </div>
@@ -142,7 +142,7 @@
                 },
                 {
                     text: "刷新", iconCls: "icon-remove", handler: function () {
-                    reflash();
+                    reflashCheck();
                 }
                 }
 
@@ -156,11 +156,11 @@
             $("#check_grid").datagrid("loadData", data);
         });
     }
-    function reflash(){
+    function reflashCheck(){
         checkload();
     }
-    function clearQueryForm(){
-        $("#queryForm").form("clear");
+    function clearQueryFormCheck(){
+        $("#queryFormCheck").form("clear");
     }
         function addPerson(){
             var x = $("#check_grid").datagrid("getSelected");
@@ -178,7 +178,12 @@
             $("#check_first").val(x);
             $("#identify").val(x);
             $("#check_work").val(x);
-            $("#check_alert1").window("open");
+            if(x!=null){
+                $.messager.alert("系统提示：","已选择账户");
+            }else {
+                $("#check_alert1").window("open");
+            }
+
         }
     function savePerson(){
          var x = $("#check_grid").datagrid("getSelected");
@@ -250,8 +255,8 @@
             $.messager.alert("系统提示：","请选择一个账户");
         }
     }
-    function query() {
-        var d= $("#queryForm").serialize();
+    function queryCheck() {
+        var d= $("#queryFormCheck").serialize();
         $.getJSON("findPersonByName.do",d,function (data) {
             //给列表填充数据
             $("#check_grid").datagrid("loadData", data);

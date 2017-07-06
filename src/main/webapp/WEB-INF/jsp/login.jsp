@@ -3,10 +3,14 @@
 <head>
     <title>登录</title>
     <script type="text/javascript">
+    $.get("login.do",function(data){
+        $("#msg").datagrid("loadData".data.msg)
+    })
     </script>
 </head>
 <body>
 <div id="form" style="display: flex;justify-content: center">
+    <div id="msg"></div>
     <form action="login.do" method="post">
         <label>账号</label>
         <input type="text" name="account"/>
