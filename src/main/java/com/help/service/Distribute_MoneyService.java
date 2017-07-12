@@ -23,4 +23,5 @@ public class Distribute_MoneyService {
     public void addwork(Distribute_Money distribute_money){dmd.addwork(distribute_money);};
     public int removeMoneyById(List<Integer> data){return dmd.removeMoneyById(data);};
     public List<Distribute_Money> showxuqi(){return dmd.showxuqi();};
+    public List<Distribute_Money> showcar(){return dmd.showcar();};
 }

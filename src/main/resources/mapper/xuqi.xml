@@ -7,6 +7,6 @@
         select * from distribute_money where money_Getsum=12
     </select>
     <select id="showcar"  resultType="com.help.entity.Car">
-        select * from cars
+        select * from cars where id=1
     </select>
 </mapper>

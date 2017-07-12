@@ -50,4 +50,7 @@ public class Distribute_MoneyController {
     @RequestMapping("findxuqi.do")
     @ResponseBody
     public List<Distribute_Money> showxuqi(){return dms.showxuqi();}
+    @RequestMapping("check.do")
+    @ResponseBody
+    public List<Distribute_Money> showcar(){return dms.showcar();}
 }
